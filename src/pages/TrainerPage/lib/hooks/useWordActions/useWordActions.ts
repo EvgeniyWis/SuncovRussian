@@ -16,7 +16,7 @@ import {
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
 } from './types/types';
-import { funcOnEnter } from '@/shared/utils/funcOnEnter';
+import { funcOnKeyDown } from '@/shared/utils/funcOnKeyDown';
 
 export const useWordActions = (
   randomWordId: number | null,
@@ -146,7 +146,11 @@ export const useWordActions = (
         elemForClick.onclick = null;
 
         document.removeEventListener('keydown', (e) =>
-          funcOnEnter(e, () => showNewWord(words, isErrorWork, randomWordId)),
+          funcOnKeyDown(
+            e,
+            () => showNewWord(words, isErrorWork, randomWordId),
+            'Enter',
+          ),
         );
 
         // Добавляем события
@@ -154,7 +158,11 @@ export const useWordActions = (
           showNewWord(words, isErrorWork, randomWordId);
 
         document.addEventListener('keydown', (e) =>
-          funcOnEnter(e, () => showNewWord(words, isErrorWork, randomWordId)),
+          funcOnKeyDown(
+            e,
+            () => showNewWord(words, isErrorWork, randomWordId),
+            'Enter',
+          ),
         );
 
         clearTimeout(eventTimeout);
