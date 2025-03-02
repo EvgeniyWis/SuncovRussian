@@ -1,36 +1,22 @@
 import { useCallback, useContext, useState } from 'react';
-import { useRandomWord } from './useRandomWord';
-import { WordsForTrainersTypes } from '../../model/types/types';
-import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
+import { useRandomWord } from '../useRandomWord';
+import { WordsForTrainersTypes } from '../../../model/types/types';
+import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 import { playSound } from '@/shared/utils/playSound';
-import { useInitializeWords } from './useInitializeWords';
-import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { useInitializeWords } from '../useInitializeWords';
+import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import {
   mobileMediaQueryWidth,
   timeoutDurationForRender,
 } from '@/shared/const/global';
 import { isInJest } from '@/shared/tests/isInJest';
-
-export type wordActionsFunctionType = (
-  words: WordsForTrainersTypes[],
-  isErrorWork: boolean,
-  randomWordId: number | null,
-) => void;
-
-export type wordActionsFunctionTypeWithElemForClick = (
-  ...args: [
-    ...Parameters<wordActionsFunctionType>,
-    elemForClick?: HTMLElement | Document,
-  ]
-) => void;
-
-interface UseWordActionsResult {
-  showNewWord: wordActionsFunctionTypeWithElemForClick;
-  wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
-  waitRepeatedClickInFail: boolean;
-}
+import {
+  UseWordActionsResult,
+  wordActionsFunctionType,
+  wordActionsFunctionTypeWithElemForClick,
+} from './types/types';
+import { funcOnEnter } from '@/shared/utils/funcOnEnter';
 
 export const useWordActions = (
   randomWordId: number | null,
@@ -64,12 +50,11 @@ export const useWordActions = (
   );
 
   // Показ нового слова
-  const showNewWord: wordActionsFunctionTypeWithElemForClick = useCallback(
+  const showNewWord: wordActionsFunctionType = useCallback(
     (
       words: WordsForTrainersTypes[],
       isErrorWork: boolean,
       randomWordId: number | null,
-      elemForClick = document,
     ) => {
       if (isOneLifeMode) {
         initializeWords();
@@ -124,11 +109,6 @@ export const useWordActions = (
       if (!isInJest()) {
         main.style.pointerEvents = 'all';
       }
-
-      // Сбрасываем события
-      elemForClick.onclick = null;
-
-      document.onkeydown = null;
     },
     [
       changeWordConsecutivelyTimes,
@@ -162,15 +142,20 @@ export const useWordActions = (
           main.style.pointerEvents = 'none';
         }
 
+        // Сбрасываем события
+        elemForClick.onclick = null;
+
+        document.removeEventListener('keydown', (e) =>
+          funcOnEnter(e, () => showNewWord(words, isErrorWork, randomWordId)),
+        );
+
         // Добавляем события
         elemForClick.onclick = () =>
           showNewWord(words, isErrorWork, randomWordId);
 
-        document.onkeydown = (e: KeyboardEvent) => {
-          if (e.key === 'Enter') {
-            showNewWord(words, isErrorWork, randomWordId);
-          }
-        };
+        document.addEventListener('keydown', (e) =>
+          funcOnEnter(e, () => showNewWord(words, isErrorWork, randomWordId)),
+        );
 
         clearTimeout(eventTimeout);
       }, timeoutDurationForRender);

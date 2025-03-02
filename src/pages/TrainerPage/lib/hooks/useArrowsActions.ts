@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
-import { useWordActions } from './useWordActions';
+import { useWordActions } from './useWordActions/useWordActions';
 import { WordsForTrainersItem } from '../../model/types/types';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 
