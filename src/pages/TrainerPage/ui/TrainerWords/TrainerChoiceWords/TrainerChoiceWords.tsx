@@ -3,16 +3,16 @@ import * as styles from './TrainerChoiceWords.module.scss';
 import {
   ChoiceWordInterface,
   ChoiceWordsCategory,
-} from '../../model/types/choice';
+} from '../../../model/types/choice';
 import { Flex } from '@/shared/lib/Stack';
-import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { clearClassesOnWord } from './lib/clearClassesOnWord';
 import { ChoiceWordOnClick } from './lib/choiceWordOnClick';
 import {
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
-} from '../../lib/hooks/useWordActions';
+} from '../../../lib/hooks/useWordActions';
 
 export interface TrainerChoiceWordsProps {
   randomWord: ChoiceWordInterface;

@@ -1,9 +1,9 @@
-import { WordsForTrainersTypes } from '../../../model/types/types';
+import { WordsForTrainersTypes } from '../../../../model/types/types';
 import {
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
-} from '../../../lib/hooks/useWordActions';
-import { ChoiceWordInterface } from '../../../model/types/choice';
+} from '../../../../lib/hooks/useWordActions';
+import { ChoiceWordInterface } from '../../../../model/types/choice';
 import { onFailHandler } from './onFailHandler';
 import { timeoutDurationForRender } from '@/shared/const/global';
 

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TrainerChoiceWords } from './TrainerChoiceWords';
-import { wordsForTrainers } from '../../model/static/wordsForTrainers';
+import { wordsForTrainers } from '../../../model/static/wordsForTrainers';
 import {
   ChoiceWordInterface,
   ChoiceWordsForTrainersItem,
-} from '../../model/types/choice';
+} from '../../../model/types/choice';
 
 const meta = {
   title: 'Pages/Trainer/TrainerChoiceWords',
