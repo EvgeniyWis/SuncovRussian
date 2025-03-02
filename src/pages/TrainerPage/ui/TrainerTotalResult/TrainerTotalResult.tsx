@@ -95,6 +95,18 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
       setAllAttemptsCount(0);
     }, [initializeWords, setAllAttemptsCount, setIsErrorWork, setTotalTime]);
 
+    // Генерация текста с неправильными буквами
+    const generateTextWithUncorrectLetters = useCallback(
+      (word: WordsForTrainersTypes) => {
+        return (
+          word.uncorrectTimes +
+          ' ' +
+          ([2, 3, 4].includes(word.uncorrectTimes!) ? 'раза' : 'раз')
+        );
+      },
+      [],
+    );
+
     return (
       <Flex
         className={styles.TrainerTotalResult__wrapper}
@@ -147,20 +159,14 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     {words.type === 'primary' && (
                       <>
                         {(word as PrimaryWordsInterface).valid} -{' '}
-                        {word.uncorrectTimes}{' '}
-                        {[2, 3, 4].includes(word.uncorrectTimes!)
-                          ? 'раза'
-                          : 'раз'}
+                        {generateTextWithUncorrectLetters(word)}
                       </>
                     )}
 
                     {words.type === 'unions' && (
                       <>
                         {(word as UnionsWordsInterface).word} -{' '}
-                        {word.uncorrectTimes}{' '}
-                        {[2, 3, 4].includes(word.uncorrectTimes!)
-                          ? 'раза'
-                          : 'раз'}{' '}
+                        {generateTextWithUncorrectLetters(word)}
                         (Правильно: {(word as UnionsWordsInterface).unionType})
                       </>
                     )}
@@ -168,10 +174,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     {words.type === 'choice' && (
                       <>
                         {(word as ChoiceWordInterface).word} -{' '}
-                        {word.uncorrectTimes}{' '}
-                        {[2, 3, 4].includes(word.uncorrectTimes!)
-                          ? 'раза'
-                          : 'раз'}{' '}
+                        {generateTextWithUncorrectLetters(word)}
                         (Правильно: {(word as ChoiceWordInterface).choiceWord})
                       </>
                     )}
