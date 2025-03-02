@@ -1,9 +1,9 @@
-import { WordsForTrainersTypes } from '../../../model/types/types';
+import { WordsForTrainersTypes } from '../../../../model/types/types';
 import {
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
-} from '../../../lib/hooks/useWordActions';
-import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
+} from '../../../../lib/hooks/useWordActions';
+import { WithMissedLettersWordsInterface } from '../../../../model/types/withMissedLetters';
 
 interface onContinueHandlerParams {
   randomWord: WithMissedLettersWordsInterface;

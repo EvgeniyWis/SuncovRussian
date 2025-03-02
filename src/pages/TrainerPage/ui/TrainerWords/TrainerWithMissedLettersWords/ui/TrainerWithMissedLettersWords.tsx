@@ -2,8 +2,8 @@ import { Flex } from '@/shared/lib/Stack';
 import {
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
-} from '../../../lib/hooks/useWordActions';
-import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
+} from '../../../../lib/hooks/useWordActions';
+import { WithMissedLettersWordsInterface } from '../../../../model/types/withMissedLetters';
 import * as styles from './TrainerWithMissedLettersWords.module.scss';
 import { Fragment, memo, useContext, useEffect } from 'react';
 import { Button } from '@/shared/ui/Button';
@@ -11,8 +11,8 @@ import { renderLetter } from '../lib/renderLetter';
 import { onContinueHandler } from '../lib/onContinueHandler';
 import { continueOnKeyDown } from '../lib/continueOnKeyDown';
 import { MissedLetterInputContext } from '@/shared/ui/MissedLetterInput';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../../../model/context/TrainerPageContext';
 
 // TODO: написать тесты
 export interface TrainerWithMissedLettersWordsProps {

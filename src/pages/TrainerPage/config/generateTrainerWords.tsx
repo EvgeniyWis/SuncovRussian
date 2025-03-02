@@ -15,10 +15,10 @@ import {
 } from '../model/types/types';
 import { UnionsWordsInterface } from '../model/types/unions';
 import { WithMissedLettersWordsInterface } from '../model/types/withMissedLetters';
-import { TrainerChoiceWords } from '../ui/TrainerChoiceWords/TrainerChoiceWords';
-import { TrainerPrimaryWords } from '../ui/TrainerPrimaryWords/TrainerPrimaryWords';
-import { TrainerUnionsWords } from '../ui/TrainerUnionsWords/TrainerUnionsWords';
-import { TrainerWithMissedLettersWords } from '../ui/TrainerWithMissedLettersWords';
+import { TrainerChoiceWords } from '../ui/TrainerWords/TrainerChoiceWords/TrainerChoiceWords';
+import { TrainerPrimaryWords } from '../ui/TrainerWords/TrainerPrimaryWords/TrainerPrimaryWords';
+import { TrainerUnionsWords } from '../ui/TrainerWords/TrainerUnionsWords/TrainerUnionsWords';
+import { TrainerWithMissedLettersWords } from '../ui/TrainerWords/TrainerWithMissedLettersWords';
 
 type TrainerWords = {
   [key in TrainerWordsType]: React.ReactNode;

@@ -1,6 +1,6 @@
-import { WordsForTrainersTypes } from '../../../model/types/types';
-import { wordActionsFunctionTypeWithElemForClick } from '../../../lib/hooks/useWordActions';
-import { ChoiceWordInterface } from '../../../model/types/choice';
+import { WordsForTrainersTypes } from '../../../../model/types/types';
+import { wordActionsFunctionTypeWithElemForClick } from '../../../../lib/hooks/useWordActions';
+import { ChoiceWordInterface } from '../../../../model/types/choice';
 import * as styles from '../TrainerChoiceWords.module.scss';
 
 export type onFailHandlerParams = (
