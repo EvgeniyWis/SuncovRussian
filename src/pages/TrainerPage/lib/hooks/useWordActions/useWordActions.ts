@@ -10,7 +10,7 @@ import { isInJest } from '@/shared/tests/isInJest';
 import {
   UseWordActionsResult,
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from './types/types';
 import { keyDownEventListener } from './helpers/keyDownEventListener';
 import {
@@ -56,8 +56,20 @@ export const useWordActions = (
   const clickEventListenerRef = useRef<(() => void) | null>(null);
 
   // Показ нового слова
-  const showNewWord: wordActionsFunctionTypeWithElemForClick = useCallback(
-    (words, isErrorWork, randomWordId, elemForClick = document) => {
+  const showNewWord: wordActionsFunctionType = useCallback(
+    (words, isErrorWork, randomWordId) => {
+      // Изменяем стили обратно
+      const main: HTMLElement = document.querySelector('main')!;
+
+      if (!isInJest()) {
+        main.style.pointerEvents = 'all';
+      }
+
+      // Удаляем обработчики событий
+      deleteRefEventListener(keydownEventListenerRef, 'keydown');
+      deleteRefEventListener(clickEventListenerRef, 'click');
+
+      // Функционал показа нового слова
       if (isOneLifeMode) {
         initializeWords();
         setAllAttemptsCount((prev) => prev + 1);
@@ -105,16 +117,6 @@ export const useWordActions = (
       }
 
       updateRandomWord();
-
-      const main: HTMLElement = document.querySelector('main')!;
-
-      if (!isInJest()) {
-        main.style.pointerEvents = 'all';
-      }
-
-      // Удаляем обработчики
-      deleteRefEventListener(clickEventListenerRef, 'click', elemForClick);
-      deleteRefEventListener(keydownEventListenerRef, 'keydown');
     },
     [
       changeWordConsecutivelyTimes,
@@ -131,8 +133,8 @@ export const useWordActions = (
   );
 
   // Изменение вероятности при правильном ответе
-  const wordOnFail: wordActionsFunctionTypeWithElemForClick = useCallback(
-    (words, isErrorWork, randomWordId, elemForClick = document) => {
+  const wordOnFail: wordActionsFunctionExtendType = useCallback(
+    (words, isErrorWork, randomWordId, type, elemForClick = document) => {
       if (waitRepeatedClickInFail) return;
 
       playSound('FailSound');
@@ -161,6 +163,7 @@ export const useWordActions = (
           showNewWord(words, isErrorWork, randomWordId);
         },
         elemForClick,
+        type === 'choice',
       );
 
       addRefEventListener(
@@ -174,6 +177,8 @@ export const useWordActions = (
             isErrorWork,
             randomWordId,
           ),
+        document,
+        type === 'choice',
       );
     },
     [setIsIncorrect, showNewWord, waitRepeatedClickInFail],

@@ -1,4 +1,7 @@
-import { WordsForTrainersTypes } from '../../../../model/types/types';
+import {
+  TrainerWordsType,
+  WordsForTrainersTypes,
+} from '../../../../model/types/types';
 
 export type wordActionsFunctionType = (
   words: WordsForTrainersTypes[],
@@ -6,16 +9,17 @@ export type wordActionsFunctionType = (
   randomWordId: number | null,
 ) => void;
 
-export type wordActionsFunctionTypeWithElemForClick = (
+export type wordActionsFunctionExtendType = (
   ...args: [
     ...Parameters<wordActionsFunctionType>,
+    type: TrainerWordsType,
     elemForClick?: HTMLElement | Document,
   ]
 ) => void;
 
 export interface UseWordActionsResult {
-  showNewWord: wordActionsFunctionTypeWithElemForClick;
+  showNewWord: wordActionsFunctionType;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
   waitRepeatedClickInFail: boolean;
 }

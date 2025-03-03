@@ -1,7 +1,7 @@
 import { WordsForTrainersTypes } from '../../../../model/types/types';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../../../../lib/hooks/useWordActions';
 import { WithMissedLettersWordsInterface } from '../../../../model/types/withMissedLetters';
 
@@ -9,7 +9,7 @@ interface onContinueHandlerParams {
   randomWord: WithMissedLettersWordsInterface;
   setIncorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
   storeWords: WordsForTrainersTypes[];
   isErrorWork: boolean;
   setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +43,7 @@ export const onContinueHandler = ({
     } else {
       setIsIncorrect(true);
       setIncorrectInputsIDs((prev) => [...prev, inputIndex]);
-      wordOnFail(storeWords, isErrorWork, randomWord.id);
+      wordOnFail(storeWords, isErrorWork, randomWord.id, 'withMissedLetters');
     }
   }
 };

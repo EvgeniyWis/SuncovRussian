@@ -7,14 +7,14 @@ import * as styles from './TrainerUnionsWords.module.scss';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../../../lib/hooks/useWordActions';
 import { UnionsWordsInterface, unionTypes } from '../../../model/types/unions';
 
 interface TrainerUnionsWordsProps {
   randomWord: UnionsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
 }
 
 export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
@@ -43,7 +43,13 @@ export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
               onClick={
                 unionType === randomWord.unionType
                   ? () => wordOnSuccess(storeWords, isErrorWork, randomWord.id)
-                  : () => wordOnFail(storeWords, isErrorWork, randomWord.id)
+                  : () =>
+                      wordOnFail(
+                        storeWords,
+                        isErrorWork,
+                        randomWord.id,
+                        'unions',
+                      )
               }
               type={
                 isIncorrect && unionType !== randomWord.unionType

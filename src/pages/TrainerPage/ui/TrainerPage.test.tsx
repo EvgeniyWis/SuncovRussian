@@ -173,6 +173,7 @@ describe('TrainerPrimaryWords', () => {
   });
 });
 
+// TODO: сделать тесты режимов и для других тренажеров
 describe('TrainerModeSwitcher', () => {
   // Helpers
   const theme: string = 'Ударения';

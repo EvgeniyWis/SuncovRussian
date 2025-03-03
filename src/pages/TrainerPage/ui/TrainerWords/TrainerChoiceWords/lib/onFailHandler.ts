@@ -1,12 +1,12 @@
 import { WordsForTrainersTypes } from '../../../../model/types/types';
-import { wordActionsFunctionTypeWithElemForClick } from '../../../../lib/hooks/useWordActions';
+import { wordActionsFunctionExtendType } from '../../../../lib/hooks/useWordActions';
 import { ChoiceWordInterface } from '../../../../model/types/choice';
 import * as styles from '../TrainerChoiceWords.module.scss';
 
 export type onFailHandlerParams = (
   e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
   randomWord: ChoiceWordInterface,
-  wordOnFail: wordActionsFunctionTypeWithElemForClick,
+  wordOnFail: wordActionsFunctionExtendType,
   storeWords: WordsForTrainersTypes[],
   isErrorWork: boolean,
 ) => void;
@@ -49,5 +49,11 @@ export const onFailHandler: onFailHandlerParams = (
       choiceWordElem.getAttribute('data-value') === randomWord.choiceWord,
   );
 
-  wordOnFail(storeWords, isErrorWork, randomWord.id, correctChoiceWordElem);
+  wordOnFail(
+    storeWords,
+    isErrorWork,
+    randomWord.id,
+    'choice',
+    correctChoiceWordElem,
+  );
 };

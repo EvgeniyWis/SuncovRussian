@@ -7,14 +7,14 @@ import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../../model/types/primary';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../../../lib/hooks/useWordActions';
 
 interface TrainerPrimaryWordsProps {
   randomWord: PrimaryWordsInterface;
   randomWordsIsReverse: boolean;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
 }
 
 export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(
@@ -106,7 +106,9 @@ export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(
 
             <TrainerWord
               dataTestId="TrainerPrimaryWords__invalid"
-              onClick={() => wordOnFail(storeWords, isErrorWork, randomWord.id)}
+              onClick={() =>
+                wordOnFail(storeWords, isErrorWork, randomWord.id, 'primary')
+              }
               type={isIncorrect ? 'invalid' : 'default'}
               style={{
                 borderRightWidth: tabletMediaQueryWidth.matches
