@@ -1,22 +1,22 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useRef, useState } from 'react';
 import { useRandomWord } from '../useRandomWord';
-import { WordsForTrainersTypes } from '../../../model/types/types';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 import { playSound } from '@/shared/utils/playSound';
 import { useInitializeWords } from '../useInitializeWords';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
-import {
-  mobileMediaQueryWidth,
-  timeoutDurationForRender,
-} from '@/shared/const/global';
+import { mobileMediaQueryWidth } from '@/shared/const/global';
 import { isInJest } from '@/shared/tests/isInJest';
 import {
   UseWordActionsResult,
   wordActionsFunctionType,
   wordActionsFunctionTypeWithElemForClick,
 } from './types/types';
-import { funcOnKeyDown } from '@/shared/utils/funcOnKeyDown';
+import { keyDownEventListener } from './helpers/keyDownEventListener';
+import {
+  addRefEventListener,
+  deleteRefEventListener,
+} from '@/shared/utils/eventListeners';
 
 export const useWordActions = (
   randomWordId: number | null,
@@ -49,13 +49,15 @@ export const useWordActions = (
     setRandomWordId,
   );
 
+  // Добавляем ref для хранения обработчиков событий
+  const keydownEventListenerRef = useRef<((e: KeyboardEvent) => void) | null>(
+    null,
+  );
+  const clickEventListenerRef = useRef<(() => void) | null>(null);
+
   // Показ нового слова
-  const showNewWord: wordActionsFunctionType = useCallback(
-    (
-      words: WordsForTrainersTypes[],
-      isErrorWork: boolean,
-      randomWordId: number | null,
-    ) => {
+  const showNewWord: wordActionsFunctionTypeWithElemForClick = useCallback(
+    (words, isErrorWork, randomWordId, elemForClick = document) => {
       if (isOneLifeMode) {
         initializeWords();
         setAllAttemptsCount((prev) => prev + 1);
@@ -109,6 +111,10 @@ export const useWordActions = (
       if (!isInJest()) {
         main.style.pointerEvents = 'all';
       }
+
+      // Удаляем обработчики
+      deleteRefEventListener(clickEventListenerRef, 'click', elemForClick);
+      deleteRefEventListener(keydownEventListenerRef, 'keydown');
     },
     [
       changeWordConsecutivelyTimes,
@@ -137,36 +143,38 @@ export const useWordActions = (
 
       const main: HTMLElement = document.querySelector('main')!;
 
-      const eventTimeout = setTimeout(() => {
-        if (!isInJest()) {
-          main.style.pointerEvents = 'none';
-        }
+      if (!isInJest()) {
+        main.style.pointerEvents = 'none';
+      }
 
-        // Сбрасываем события
-        elemForClick.onclick = null;
+      // Добавляем обработчики
+      let isFirstClick = true; // Флаг для того, чтобы не вызывать showNewWord при первом клике
+      addRefEventListener(
+        clickEventListenerRef,
+        'click',
+        () => {
+          if (isFirstClick) {
+            isFirstClick = false;
+            return;
+          }
 
-        document.removeEventListener('keydown', (e) =>
-          funcOnKeyDown(
-            e,
-            () => showNewWord(words, isErrorWork, randomWordId),
-            'Enter',
-          ),
-        );
-
-        // Добавляем события
-        elemForClick.onclick = () =>
           showNewWord(words, isErrorWork, randomWordId);
+        },
+        elemForClick,
+      );
 
-        document.addEventListener('keydown', (e) =>
-          funcOnKeyDown(
+      addRefEventListener(
+        keydownEventListenerRef,
+        'keydown',
+        (e: KeyboardEvent) =>
+          keyDownEventListener(
             e,
-            () => showNewWord(words, isErrorWork, randomWordId),
-            'Enter',
+            showNewWord,
+            words,
+            isErrorWork,
+            randomWordId,
           ),
-        );
-
-        clearTimeout(eventTimeout);
-      }, timeoutDurationForRender);
+      );
     },
     [setIsIncorrect, showNewWord, waitRepeatedClickInFail],
   );

@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useMemo } from 'react';
+import { memo, useCallback, useContext, useEffect, useMemo } from 'react';
 import * as styles from './TrainerChoiceWords.module.scss';
 import {
   ChoiceWordInterface,
@@ -32,7 +32,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
   }): React.JSX.Element => {
     // Инициализация данных и контекста
     const storeWords = useWords();
-    const { isErrorWork } = useContext(TrainerPageContext);
+    const { isErrorWork, isIncorrect } = useContext(TrainerPageContext);
 
     // При новом слове производим очистку классов у слов
     useEffect(() => {
@@ -43,6 +43,32 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
     const isWithoutCategory = useMemo(
       () => !categories.find((category) => category.category),
       [categories],
+    );
+
+    // Обработка клика на слово
+    const handleChoiceWordClick = useCallback(
+      (e: React.MouseEvent<HTMLSpanElement>, choiceWord: string) => {
+        ChoiceWordOnClick(
+          e,
+          randomWord,
+          choiceWord,
+          wordOnSuccess,
+          wordOnFail,
+          isErrorWork,
+          storeWords,
+          showNewWord,
+          isIncorrect,
+        );
+      },
+      [
+        randomWord,
+        wordOnSuccess,
+        wordOnFail,
+        isErrorWork,
+        storeWords,
+        showNewWord,
+        isIncorrect,
+      ],
     );
 
     return (
@@ -86,18 +112,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
               <div className={styles.TrainerChoiceWords__choiceWords}>
                 {category.choiceWords.map((choiceWord) => (
                   <span
-                    onClick={(e) =>
-                      ChoiceWordOnClick(
-                        e,
-                        randomWord,
-                        choiceWord,
-                        wordOnSuccess,
-                        wordOnFail,
-                        isErrorWork,
-                        storeWords,
-                        showNewWord,
-                      )
-                    }
+                    onClick={(e) => handleChoiceWordClick(e, choiceWord)}
                     className={styles.TrainerChoiceWords__choiceWord}
                     key={choiceWord}
                     data-name="TrainerChoiceWords_choiceWord"

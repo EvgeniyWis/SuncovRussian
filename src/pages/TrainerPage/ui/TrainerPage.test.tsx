@@ -348,11 +348,11 @@ describe('TrainerChoiceWords', () => {
       // Получаем текущее слово и его значения
       const currentWordValues = getCurrentWord();
 
-      // Кликаем на правильный вариант ответа
-      await clickChoiceWord(currentWordValues, true);
-
       // Кликаем на неправильный вариант ответа
       await clickChoiceWord(currentWordValues, false);
+
+      // Кликаем на правильный вариант ответа
+      await clickChoiceWord(currentWordValues, true);
 
       // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
       await checkProgressBarValue(0, component, 'greaterThan');

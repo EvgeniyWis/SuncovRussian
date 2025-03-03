@@ -10,6 +10,7 @@ import {
   useEffect,
   useMemo,
   Fragment,
+  useRef,
 } from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
@@ -27,6 +28,10 @@ import {
   timeoutDurationForRender,
 } from '@/shared/const/global';
 import { generateTrainerWords } from '../config/generateTrainerWords';
+import {
+  addRefEventListener,
+  deleteRefEventListener,
+} from '@/shared/utils/eventListeners';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -85,11 +90,19 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       randomWordsIsReverse,
     );
 
+    const keydownEventListenerRef = useRef<((e: KeyboardEvent) => void) | null>(
+      null,
+    );
+
     useEffect(() => {
-      document.onkeydown = (e) => checkArrowsPress(e, words);
+      addRefEventListener(
+        keydownEventListenerRef,
+        'keydown',
+        (e: KeyboardEvent) => checkArrowsPress(e, words),
+      );
 
       return () => {
-        document.onkeydown = null;
+        deleteRefEventListener(keydownEventListenerRef, 'keydown');
       };
     }, [checkArrowsPress, words]);
 
@@ -104,7 +117,8 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
         initializeWords();
         clearTimeout(timeoutForInitializeWords);
       }, timeoutDurationForRender);
-    }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Определение, нужно ли использовать maxHeight
     const withoutMaxHeight = useMemo(
