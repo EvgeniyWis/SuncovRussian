@@ -11,18 +11,16 @@ import { clearClassesOnWord } from './lib/clearClassesOnWord';
 import { ChoiceWordOnClick } from './lib/choiceWordOnClick';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../../../lib/hooks/useWordActions';
 
 export interface TrainerChoiceWordsProps {
   randomWord: ChoiceWordInterface;
   categories: ChoiceWordsCategory[];
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
   showNewWord: wordActionsFunctionType;
 }
-
-// TODO: отследить ререндеры, почему иногда isIncorrect 2 раза меняется
 
 export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
   ({

@@ -1,5 +1,5 @@
 export { useWordActions } from './useWordActions';
 export type {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from './types/types';

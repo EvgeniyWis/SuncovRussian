@@ -1,7 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../../../../lib/hooks/useWordActions';
 import { WithMissedLettersWordsInterface } from '../../../../model/types/withMissedLetters';
 import * as styles from './TrainerWithMissedLettersWords.module.scss';
@@ -18,7 +18,7 @@ import { TrainerPageContext } from '../../../../model/context/TrainerPageContext
 export interface TrainerWithMissedLettersWordsProps {
   randomWord: WithMissedLettersWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  wordOnFail: wordActionsFunctionExtendType;
 }
 
 export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWordsProps> =

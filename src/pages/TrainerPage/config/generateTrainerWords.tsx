@@ -1,7 +1,7 @@
 import { MissedLetterInputProvider } from '@/shared/ui/MissedLetterInput';
 import {
   wordActionsFunctionType,
-  wordActionsFunctionTypeWithElemForClick,
+  wordActionsFunctionExtendType,
 } from '../lib/hooks/useWordActions';
 import {
   ChoiceWordInterface,
@@ -27,7 +27,7 @@ type TrainerWords = {
 export const generateTrainerWords = (
   randomWord: WordsForTrainersTypes,
   randomWordsIsReverse: boolean,
-  wordOnFail: wordActionsFunctionTypeWithElemForClick,
+  wordOnFail: wordActionsFunctionExtendType,
   wordOnSuccess: wordActionsFunctionType,
   words: WordsForTrainersItem,
   showNewWord: wordActionsFunctionType,
