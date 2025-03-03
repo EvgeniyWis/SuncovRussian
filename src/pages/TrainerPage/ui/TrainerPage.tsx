@@ -95,6 +95,8 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     );
 
     useEffect(() => {
+      if (['choice', 'withMissedLetters'].includes(words.type)) return;
+
       addRefEventListener(
         keydownEventListenerRef,
         'keydown',
