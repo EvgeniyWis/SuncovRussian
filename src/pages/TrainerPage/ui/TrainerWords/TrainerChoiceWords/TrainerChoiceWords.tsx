@@ -22,6 +22,8 @@ export interface TrainerChoiceWordsProps {
   showNewWord: wordActionsFunctionType;
 }
 
+// TODO: отследить ререндеры, почему иногда isIncorrect 2 раза меняется
+
 export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
   ({
     randomWord,
