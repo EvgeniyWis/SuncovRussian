@@ -6,13 +6,14 @@ import {
   WordsForTrainersItem,
   WordsForTrainersTypes,
 } from '../../model/types/types';
-import { PrimaryWordsInterface } from '../../model/types/primary';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
-import { UnionsWordsInterface } from '../../model/types/unions';
 import { Button } from '@/shared/ui/Button/ui/Button';
-import { ChoiceWordInterface } from '../../model/types/choice';
+import {
+  generateBlockWithUncorrectWord,
+  generateBlockWithUncorrectWordArray,
+} from './lib/generateBlockWithUncorrectWord';
 
 interface TrainerTotalResultProps {
   updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
@@ -95,18 +96,6 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
       setAllAttemptsCount(0);
     }, [initializeWords, setAllAttemptsCount, setIsErrorWork, setTotalTime]);
 
-    // Генерация текста с неправильными буквами
-    const generateTextWithUncorrectLetters = useCallback(
-      (word: WordsForTrainersTypes) => {
-        return (
-          word.uncorrectTimes +
-          ' ' +
-          ([2, 3, 4].includes(word.uncorrectTimes!) ? 'раза' : 'раз')
-        );
-      },
-      [],
-    );
-
     return (
       <Flex
         className={styles.TrainerTotalResult__wrapper}
@@ -156,28 +145,17 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
-                    {words.type === 'primary' && (
+                    {generateBlockWithUncorrectWordArray(word).map((item) => (
                       <>
-                        {(word as PrimaryWordsInterface).valid} -{' '}
-                        {generateTextWithUncorrectLetters(word)}
+                        {generateBlockWithUncorrectWord({
+                          wordObject: word,
+                          words,
+                          type: item.type,
+                          word: item.word,
+                          validWord: item.validWord,
+                        })}
                       </>
-                    )}
-
-                    {words.type === 'unions' && (
-                      <>
-                        {(word as UnionsWordsInterface).word} -{' '}
-                        {generateTextWithUncorrectLetters(word)}
-                        (Правильно: {(word as UnionsWordsInterface).unionType})
-                      </>
-                    )}
-
-                    {words.type === 'choice' && (
-                      <>
-                        {(word as ChoiceWordInterface).word} -{' '}
-                        {generateTextWithUncorrectLetters(word)}
-                        (Правильно: {(word as ChoiceWordInterface).choiceWord})
-                      </>
-                    )}
+                    ))}
                   </span>
                 ))}
               </Flex>
