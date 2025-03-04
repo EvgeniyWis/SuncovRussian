@@ -18,7 +18,7 @@ export const useArrowsActions = (
   const { totalTime, isIncorrect, isErrorWork } =
     useContext(TrainerPageContext);
 
-  const { showNewWord, waitRepeatedClickInFail } = useWordActions(
+  const { showNewWord } = useWordActions(
     randomWordId,
     setRandomWordsIsReverse,
     setRandomWordId,
@@ -31,8 +31,8 @@ export const useArrowsActions = (
   ): void => {
     if (totalTime) return;
 
-    if (waitRepeatedClickInFail && isIncorrect) {
-      showNewWord(words.items, isErrorWork, randomWordId);
+    if (isIncorrect) {
+      return showNewWord(words.items, isErrorWork, randomWordId);
     }
 
     const wordElements = document.querySelectorAll('[data-name="TrainerWord"]');

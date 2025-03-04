@@ -21,5 +21,4 @@ export interface UseWordActionsResult {
   showNewWord: wordActionsFunctionType;
   wordOnSuccess: wordActionsFunctionType;
   wordOnFail: wordActionsFunctionExtendType;
-  waitRepeatedClickInFail: boolean;
 }

@@ -161,6 +161,8 @@ export const useWordActions = (
           }
 
           showNewWord(words, isErrorWork, randomWordId);
+
+          deleteRefEventListener(clickEventListenerRef, 'click');
         },
         elemForClick,
         type === 'choice',
@@ -169,14 +171,17 @@ export const useWordActions = (
       addRefEventListener(
         keydownEventListenerRef,
         'keydown',
-        (e: KeyboardEvent) =>
+        (e: KeyboardEvent) => {
           keyDownEventListener(
             e,
             showNewWord,
             words,
             isErrorWork,
             randomWordId,
-          ),
+          );
+
+          deleteRefEventListener(keydownEventListenerRef, 'keydown');
+        },
         document,
         type === 'choice',
       );
@@ -272,6 +277,5 @@ export const useWordActions = (
     showNewWord,
     wordOnSuccess,
     wordOnFail,
-    waitRepeatedClickInFail,
   };
 };
