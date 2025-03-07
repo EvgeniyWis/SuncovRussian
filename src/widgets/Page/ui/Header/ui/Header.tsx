@@ -48,6 +48,9 @@ export const Header: React.FC<HeaderProps> = memo(
               // Инициализация ссылки предмета навигации
               const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
 
+              // Инициализация начала data-testid
+              const dataTestID = `Header__${category.replace(' ', '_')}`;
+
               return (
                 <Flex
                   onMouseLeave={() => setHoveredHeaderCategory(null)}
@@ -62,7 +65,7 @@ export const Header: React.FC<HeaderProps> = memo(
                     onMouseEnter={() => setHoveredHeaderCategory(category)}
                     className={`${styles.Header__item} 
                 ${matchPath(itemLink, window.location.pathname) && styles.Header__item__active}`}
-                    data-testid={`Header__${category}`}
+                    data-testid={dataTestID}
                   >
                     {submenu.length > 0 ? (
                       <>{category}</>
@@ -77,6 +80,7 @@ export const Header: React.FC<HeaderProps> = memo(
                       className={`${styles.Header__submenu} 
             ${headerHoveredCategory === category && styles.Header__submenu__active}`}
                       direction="column"
+                      data-testid={`${dataTestID}__submenu`}
                     >
                       {submenu.map((menuItem) => {
                         const isUsual = typeof menuItem === 'string';
@@ -150,6 +154,7 @@ export const Header: React.FC<HeaderProps> = memo(
 
                                       <Flex
                                         align="start"
+                                        data-testid={`${dataTestID}__submenu__submenu`}
                                         className={`${styles.Header__submenu__submenu} 
                                         ${visibleSubmenu === menuItem.theme && styles.Header__submenu__submenu__visible}`}
                                       >

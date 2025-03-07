@@ -1,6 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TrainerTotalResult.module.scss';
-import { memo, useCallback, useContext, useMemo } from 'react';
+import { Fragment, memo, useCallback, useContext, useMemo } from 'react';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   WordsForTrainersItem,
@@ -145,7 +145,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     key={word.id}
                   >
                     {generateBlockWithUncorrectWordArray(word).map((item) => (
-                      <>
+                      <Fragment key={item.type}>
                         {generateBlockWithUncorrectWord({
                           wordObject: word,
                           words,
@@ -153,7 +153,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                           word: item.word,
                           validWord: item.validWord,
                         })}
-                      </>
+                      </Fragment>
                     ))}
                   </span>
                 ))}

@@ -15,7 +15,6 @@ import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainer
 import { TrainerPageContext } from '../../../../model/context/TrainerPageContext';
 import { renderCorrectWord } from '../lib/renderCorrectWord';
 
-// TODO: написать тесты
 export interface TrainerWithMissedLettersWordsProps {
   randomWord: WithMissedLettersWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
@@ -95,6 +94,7 @@ export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWor
           size="big"
           variant="inverse"
           id="TrainerWithMissedLettersWords__continueButton"
+          data-testid="TrainerWithMissedLettersWords__continueButton"
         >
           Далее
         </Button>
