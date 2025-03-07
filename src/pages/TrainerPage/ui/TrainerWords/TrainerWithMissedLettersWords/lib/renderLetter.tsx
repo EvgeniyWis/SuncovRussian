@@ -11,6 +11,7 @@ export const renderLetter = (
       <MissedLetterInput
         data-index={index}
         data-name="TrainerWithMissedLetters__input"
+        data-testid="TrainerWithMissedLetters__input"
         autoFocus
         isIncorrect={incorrectInputsIDs.includes(index)}
         sizeProp="big"
