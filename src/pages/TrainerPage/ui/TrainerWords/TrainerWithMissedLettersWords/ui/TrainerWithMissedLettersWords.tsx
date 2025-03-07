@@ -13,6 +13,7 @@ import { continueOnKeyDown } from '../lib/continueOnKeyDown';
 import { MissedLetterInputContext } from '@/shared/ui/MissedLetterInput';
 import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../../model/context/TrainerPageContext';
+import { renderCorrectWord } from '../lib/renderCorrectWord';
 
 // TODO: написать тесты
 export interface TrainerWithMissedLettersWordsProps {
@@ -60,7 +61,9 @@ export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWor
     return (
       <Flex width="100" maxHeight justify="center" direction="column" gap="50">
         <Flex direction="column">
-          <span className={styles.TrainerWithMissedLettersWords__letter}>
+          <span
+            className={styles.TrainerWithMissedLettersWords__letter__medium}
+          >
             {randomWord.word.split('').map((letter, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Fragment key={index}>
@@ -74,26 +77,7 @@ export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWor
             ))}
           </span>
 
-          {isIncorrect && (
-            <span className={styles.TrainerWithMissedLettersWords__letter}>
-              {randomWord.word.split('').map((letter, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Fragment key={index}>
-                  {randomWord.missedLettersIndexes.includes(index + 1) ? (
-                    <span
-                      className={
-                        styles.TrainerWithMissedLettersWords__correctLetter
-                      }
-                    >
-                      {letter}
-                    </span>
-                  ) : (
-                    letter
-                  )}
-                </Fragment>
-              ))}
-            </span>
-          )}
+          {isIncorrect && renderCorrectWord(randomWord)}
         </Flex>
 
         <Button

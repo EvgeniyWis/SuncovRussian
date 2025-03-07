@@ -130,7 +130,6 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
           <Flex
             className={styles.TrainerTotalResult__textWrapper}
             gap="20"
-            maxHeight
             justify="between"
             direction="column"
           >

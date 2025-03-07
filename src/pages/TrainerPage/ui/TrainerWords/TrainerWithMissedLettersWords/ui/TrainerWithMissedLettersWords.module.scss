@@ -2,11 +2,17 @@
 
 .TrainerWithMissedLettersWords {
   &__letter {
-    font-weight: 500;
-    font-size: 60px;
+    &__medium {
+      font-weight: 500;
+      font-size: 60px;
 
-    @media (max-width: $laptop-mediaquery-width) {
-      font-size: 40px;
+      @media (max-width: $laptop-mediaquery-width) {
+        font-size: 40px;
+      }
+    }
+
+    &__small {
+      font-size: 24px;
     }
   }
 
