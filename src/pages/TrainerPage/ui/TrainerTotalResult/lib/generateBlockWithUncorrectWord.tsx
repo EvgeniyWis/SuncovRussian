@@ -6,12 +6,14 @@ import {
   WordsForTrainersTypes,
 } from '../../../model/types/types';
 import { ChoiceWordInterface } from '../../../model/types/choice';
+import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
+import { renderCorrectWord } from '../../TrainerWords/TrainerWithMissedLettersWords/lib/renderCorrectWord';
 
 interface GenerateBlockWithUncorrectWordProps {
   wordObject: WordsForTrainersTypes;
   words: WordsForTrainersItem;
   type: TrainerWordsType;
-  word: string;
+  word: string | React.ReactNode;
   validWord?: string;
 }
 
@@ -34,6 +36,11 @@ export const generateBlockWithUncorrectWordArray = (
     type: 'choice',
     word: (word as ChoiceWordInterface).word,
     validWord: (word as ChoiceWordInterface).choiceWord,
+  },
+
+  {
+    type: 'withMissedLetters',
+    word: renderCorrectWord(word as WithMissedLettersWordsInterface, 'small'),
   },
 ];
 
