@@ -15,10 +15,10 @@
 - `npm run dev` - Запуск проекта в dev режиме на Vite
 - `npm run build` - Сборка проекта с помощью Vite
 - `npm run deploy` - Деплой проекта на Github Pages
-- `npm run stylelint:check` - Запуск проверки scss файлов проекта с помощью styleLint
-- `npm run stylelint:fix` - Запуск исправления scss файлов проекта, там где это возможно, с помощью styleLint
-- `npm run eslint:check` - Запуск проверки ts файлов проекта с помощью esLint
-- `npm run eslint:fix` - Запуск исправления ts файлов проекта, там где это возможно, с помощью esLint
+- `npm run lint:scss` - Запуск проверки scss файлов проекта с помощью styleLint
+- `npm run lint:scss:fix` - Запуск исправления scss файлов проекта, там где это возможно, с помощью styleLint
+- `npm run lint:ts` - Запуск проверки ts файлов проекта с помощью esLint
+- `npm run lint:ts:fix` - Запуск исправления ts файлов проекта, там где это возможно, с помощью esLint
 - `npm run storybook` - запуск Storybook
 - `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
