@@ -32,7 +32,6 @@ export default [
       'prettier',
       'plugin:storybook/recommended',
       'plugin:react/recommended',
-      'prettier',
     ),
   ),
   {
