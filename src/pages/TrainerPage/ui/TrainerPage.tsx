@@ -11,6 +11,7 @@ import {
   useMemo,
   Fragment,
   useRef,
+  useLayoutEffect,
 } from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
@@ -32,6 +33,7 @@ import {
   addRefEventListener,
   deleteRefEventListener,
 } from '@/shared/utils/eventListeners';
+import { checkTrainerRender } from '../model/selectors/checkTrainerIsRender/checkTrainerIsRender';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -111,16 +113,17 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     // Инициализация слов
     const { initializeWords } = useInitializeWords(words.items);
 
-    useEffect(() => {
-      const timeoutForInitializeWords = setTimeout(() => {
-        setIsIncorrect(false);
-        setIsErrorWork(false);
-        setTotalTime(0);
-        initializeWords();
-        clearTimeout(timeoutForInitializeWords);
-      }, timeoutDurationForRender);
+    const isTrainerRender = checkTrainerRender();
+
+    useLayoutEffect(() => {
+      if (!isTrainerRender) return;
+
+      setIsIncorrect(false);
+      setIsErrorWork(false);
+      setTotalTime(0);
+      initializeWords();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [theme, isTrainerRender]);
 
     // Определение, нужно ли использовать maxHeight
     const withoutMaxHeight = useMemo(

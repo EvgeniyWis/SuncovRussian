@@ -4064,7 +4064,7 @@ export const wordsForTrainers: WordsForTrainers = {
     ],
   },
 
-  'разряды союзов': {
+  'Разряды союзов': {
     type: 'choice',
     inHeader: true,
     categories: [

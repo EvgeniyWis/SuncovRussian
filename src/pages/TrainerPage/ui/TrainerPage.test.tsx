@@ -10,14 +10,11 @@ import { getRouteTrainer } from '@/shared/const/router';
 import { wordsForTrainers } from '../model/static/wordsForTrainers';
 import { UnionsWordsInterface, unionTypes } from '../model/types/unions';
 import userEvent from '@testing-library/user-event';
-// import {
-//   ChoiceWordInterface,
-//   ChoiceWordsForTrainersItem,
-// } from '../model/types/choice';
-// import { WordsForTrainersItem } from '../model/types/types';
+import {
+  ChoiceWordInterface,
+  ChoiceWordsForTrainersItem,
+} from '../model/types/choice';
 import { transliterate } from '@/shared/utils/transliterate';
-
-// TODO: раскомментить и починить все тесты
 
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
@@ -28,7 +25,7 @@ type WordsTestIDs =
   | 'TrainerUnionsWords__Подчинительный'
   | 'TrainerUnionsWords__Сочинительный';
 
-// type ModeTypes = 'Одна жизнь' | 'Проверка';
+type ModeTypes = 'Одна жизнь' | 'Проверка';
 
 // Helpers
 
@@ -93,10 +90,16 @@ const clickWordAndCheckUncorrectBar = async (
 
 // Функция для сет-апа
 const setupTest = (theme: string) => {
-  return renderWithProviders(
+  if (!wordsForTrainers[theme]) {
+    throw new Error('Тема не найдена');
+  }
+
+  const result = renderWithProviders(
     <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
     getRouteTrainer(transliterate(theme)),
   );
+
+  return result;
 };
 
 // Tests
@@ -208,7 +211,6 @@ describe('TrainerPrimaryWords', () => {
 //   // Функция для генерации блока-теста
 //   const generateTestBlock = (name: string, theme: string) => {
 //     return describe(name, () => {
-
 //       // BeforeEach
 //       let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 
@@ -301,191 +303,189 @@ describe('TrainerPrimaryWords', () => {
 //   });
 // });
 
-// describe('TrainerChoiceWords', () => {
-//   // Helpers
-//   const theme: string = 'разряды союзов';
+describe('TrainerChoiceWords', () => {
+  // Helpers
+  const theme: string = 'Разряды союзов';
 
-//   // Функция для получения текущего слова и его значений
-//   const getCurrentWord = (): ChoiceWordInterface => {
-//     // Получаем текущее слово и его значения
-//     const TrainerChoiceWordsWord = component.getByTestId(
-//       'TrainerChoiceWords_word',
-//     );
+  // Функция для получения текущего слова и его значений
+  const getCurrentWord = (): ChoiceWordInterface => {
+    // Получаем текущее слово и его значения
+    const TrainerChoiceWordsWord = component.getByTestId(
+      'TrainerChoiceWords_word',
+    );
 
-//     const currentWordValues = (
-//       wordsForTrainers[theme] as ChoiceWordsForTrainersItem
-//     ).items.find((item) => item.word === TrainerChoiceWordsWord.textContent)!;
+    const currentWordValues = (
+      wordsForTrainers[theme] as ChoiceWordsForTrainersItem
+    ).items.find((item) => item.word === TrainerChoiceWordsWord.textContent)!;
 
-//     return currentWordValues;
-//   };
+    return currentWordValues;
+  };
 
-//   // Функция для клика на слово
-//   const clickChoiceWord = async (
-//     currentWordValues: ChoiceWordInterface,
-//     correct: boolean,
-//   ) => {
-//     // Получаем все варианты ответа
-//     const TrainerChoiceWordsChoiceWords = component.getAllByTestId(
-//       'TrainerChoiceWords_choiceWord',
-//     );
+  // Функция для клика на слово
+  const clickChoiceWord = async (
+    currentWordValues: ChoiceWordInterface,
+    correct: boolean,
+  ) => {
+    // Получаем все варианты ответа
+    const TrainerChoiceWordsChoiceWords = component.getAllByTestId(
+      'TrainerChoiceWords_choiceWord',
+    );
 
-//     // Получаем и кликаем на вариант ответа
-//     const trainerChoiceWordsChoiceWord = TrainerChoiceWordsChoiceWords.find(
-//       (choiceWord) =>
-//         correct
-//           ? choiceWord.textContent === currentWordValues.choiceWord
-//           : choiceWord.textContent !== currentWordValues.choiceWord,
-//     )!;
+    // Получаем и кликаем на вариант ответа
+    const trainerChoiceWordsChoiceWord = TrainerChoiceWordsChoiceWords.find(
+      (choiceWord) =>
+        correct
+          ? choiceWord.textContent === currentWordValues.choiceWord
+          : choiceWord.textContent !== currentWordValues.choiceWord,
+    )!;
 
-//     // Кликаем на вариант ответа
-//     await userEvent.click(trainerChoiceWordsChoiceWord);
+    // Кликаем на вариант ответа
+    await userEvent.click(trainerChoiceWordsChoiceWord);
 
-//     // Проверяем, появилась ли плашка "Неверно" или нет
-//     await checkUncorrectBar(component, !correct, !correct);
+    // Проверяем, появилась ли плашка "Неверно" или нет
+    await checkUncorrectBar(component, !correct, !correct);
 
-//     if (!correct) {
-//       // Получаем правильное слово
-//       const correctWord = TrainerChoiceWordsChoiceWords.find(
-//         (choiceWord) => choiceWord.textContent === currentWordValues.choiceWord,
-//       )!;
+    if (!correct) {
+      // Получаем правильное слово
+      const correctWord = TrainerChoiceWordsChoiceWords.find(
+        (choiceWord) => choiceWord.textContent === currentWordValues.choiceWord,
+      )!;
 
-//       // Кликаем на правильное слово, чтобы убрать плашку
-//       await userEvent.click(correctWord);
-//     }
-//   };
+      // Кликаем на правильное слово, чтобы убрать плашку
+      await userEvent.click(correctWord);
+    }
+  };
 
-//   // BeforeEach
-//   let component: ReturnType<typeof setupTest>;
+  // BeforeEach
+  let component: ReturnType<typeof setupTest>;
 
-//   beforeEach(async () => {
-//     await waitFor(() => {
-//       component = setupTest(theme);
-//     });
-//   });
+  beforeEach(async () => {
+    await waitFor(() => {
+      component = setupTest(theme);
+    });
+  });
 
-//   // Tests
-//   test('Click valid choiceWord and not get an error, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем текущее слово и его значения
-//       const currentWordValues = getCurrentWord();
+  // Tests
+  test('Click valid choiceWord and not get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
 
-//       // Кликаем на правильный вариант ответа
-//       await clickChoiceWord(currentWordValues, true);
+      // Кликаем на правильный вариант ответа
+      await clickChoiceWord(currentWordValues, true);
 
-//       // Прогресс бар должен увеличиться
-//       await checkProgressBarValue(0, component, 'greaterThan');
-//     });
-//   });
+      // Прогресс бар должен увеличиться
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
 
-//   test('Click invalid choiceWord and valid choiceWord and get an error, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем текущее слово и его значения
-//       const currentWordValues = getCurrentWord();
+  test('Click invalid choiceWord and valid choiceWord and get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
 
-//       // Кликаем на неправильный вариант ответа
-//       await clickChoiceWord(currentWordValues, false);
+      // Кликаем на неправильный вариант ответа
+      await clickChoiceWord(currentWordValues, false);
 
-//       // Кликаем на правильный вариант ответа
-//       await clickChoiceWord(currentWordValues, true);
+      // Кликаем на правильный вариант ответа
+      await clickChoiceWord(currentWordValues, true);
 
-//       // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
-//       await checkProgressBarValue(0, component, 'greaterThan');
-//     });
-//   });
+      // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
 
-//   test('Click invalid choiceWord, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем текущее слово и его значения
-//       const currentWordValues = getCurrentWord();
+  test('Click invalid choiceWord, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
 
-//       // Кликаем на неправильный вариант ответа
-//       await clickChoiceWord(currentWordValues, false);
+      // Кликаем на неправильный вариант ответа
+      await clickChoiceWord(currentWordValues, false);
 
-//       // Прогресс бар должен быть равен нулю
-//       await checkProgressBarValue(0, component);
-//     });
-//   });
-// });
+      // Прогресс бар должен быть равен нулю
+      await checkProgressBarValue(0, component);
+    });
+  });
+});
 
-// describe('TrainerWithMissedLettersWords', () => {
-//   // Mocks
-//   const theme: string = 'словарные слова';
+describe('TrainerWithMissedLettersWords', () => {
+  // Mocks
+  const theme: string = 'Словарные слова';
 
-//   // Функция для получения пропущенной буквы и вписывания туда правильной буквы
-//   const getMissedLetterAndInputCorrectLetter = async (letter: string) => {
-//     const missedLetterInput = component.getByTestId(
-//       'TrainerWithMissedLetters__input',
-//     );
+  // Функция для получения пропущенной буквы и вписывания туда правильной буквы
+  const getMissedLetterAndInputCorrectLetter = async (letter: string) => {
+    const missedLetterInput = component.getByTestId(
+      'TrainerWithMissedLetters__input',
+    );
 
-//     await userEvent.type(missedLetterInput, letter);
-//   };
+    await userEvent.type(missedLetterInput, letter);
+  };
 
-//   // Функция для клика на кнопку "Далее"
-//   const clickContinueButton = async (isUncorrectIsExpected: boolean) => {
-//     const continueButton = component.getByTestId(
-//       'TrainerWithMissedLettersWords__continueButton',
-//     );
+  // Функция для клика на кнопку "Далее"
+  const clickContinueButton = async (isUncorrectIsExpected: boolean) => {
+    const continueButton = component.getByTestId(
+      'TrainerWithMissedLettersWords__continueButton',
+    );
 
-//     await userEvent.click(continueButton);
+    await userEvent.click(continueButton);
 
-//     await checkUncorrectBar(component, isUncorrectIsExpected);
-//   };
+    await checkUncorrectBar(component, isUncorrectIsExpected);
+  };
 
-//   // BeforeEach
-//   let component: ReturnType<typeof setupTest>;
+  // BeforeEach
+  let component: ReturnType<typeof setupTest>;
 
-//   beforeEach(async () => {
-//     await waitFor(() => {
-//       component = setupTest(theme);
-//     });
-//   });
+  beforeEach(async () => {
+    await waitFor(() => {
+      component = setupTest(theme);
+    });
+  });
 
-//   // Tests
-//   test('Input valid letter in word and not get an error, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем пропущенную букву и вписываем туда правильную
-//       await getMissedLetterAndInputCorrectLetter('и');
+  // Tests
+  test('Input valid letter in word and not get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем пропущенную букву и вписываем туда правильную
+      await getMissedLetterAndInputCorrectLetter('и');
+      // Кликаем на кнопку "Далее"
+      await clickContinueButton(false);
+      // Прогресс бар должен увеличиться
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
 
-//       // Кликаем на кнопку "Далее"
-//       await clickContinueButton(false);
+  test('Input invalid letter in word and valid letter in word and get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем пропущенную букву и вписываем туда неправильную
+      await getMissedLetterAndInputCorrectLetter('!');
 
-//       // Прогресс бар должен увеличиться
-//       await checkProgressBarValue(0, component, 'greaterThan');
-//     });
-//   });
+      // Кликаем на кнопку "Далее"
+      await clickContinueButton(true);
 
-//   test('Input invalid letter in word and valid letter in word and get an error, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем пропущенную букву и вписываем туда неправильную
-//       await getMissedLetterAndInputCorrectLetter('!');
+      // Получаем пропущенную букву и вписываем туда правильную
+      await getMissedLetterAndInputCorrectLetter('и');
 
-//       // Кликаем на кнопку "Далее"
-//       await clickContinueButton(true);
+      // Кликаем на кнопку "Далее"
+      await clickContinueButton(false);
 
-//       // Получаем пропущенную букву и вписываем туда правильную
-//       await getMissedLetterAndInputCorrectLetter('и');
+      // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
 
-//       // Кликаем на кнопку "Далее"
-//       await clickContinueButton(false);
+  test('Input invalid letter in word and get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем пропущенную букву и вписываем туда неправильную
+      await getMissedLetterAndInputCorrectLetter('!');
 
-//       // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
-//       await checkProgressBarValue(0, component, 'greaterThan');
-//     });
-//   });
+      // Кликаем на кнопку "Далее"
+      await clickContinueButton(true);
 
-//   test('Input invalid letter in word and get an error, check progress bar', async () => {
-//     await waitFor(async () => {
-//       // Получаем пропущенную букву и вписываем туда неправильную
-//       await getMissedLetterAndInputCorrectLetter('!');
-
-//       // Кликаем на кнопку "Далее"
-//       await clickContinueButton(true);
-
-//       // Прогресс бар должен быть равен нулю
-//       await checkProgressBarValue(0, component);
-//     });
-//   });
-// });
+      // Прогресс бар должен быть равен нулю
+      await checkProgressBarValue(0, component);
+    });
+  });
+});
 
 describe('TrainerUnionsWords', () => {
   // Helpers

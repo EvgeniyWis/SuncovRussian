@@ -8,7 +8,7 @@ describe('AppRouter', () => {
     renderWithProviders(<AppRouter />, getRouteMain());
 
     await waitFor(() => {
-      const page = screen.getByTestId('MainPage');
+      const page = screen.queryByTestId('MainPage');
       expect(page).toBeInTheDocument();
     });
   });
@@ -17,7 +17,7 @@ describe('AppRouter', () => {
     renderWithProviders(<AppRouter />, '/sasasa');
 
     await waitFor(() => {
-      const page = screen.getByTestId('NotFoundPage');
+      const page = screen.queryByTestId('NotFoundPage');
       expect(page).toBeInTheDocument();
     });
   });

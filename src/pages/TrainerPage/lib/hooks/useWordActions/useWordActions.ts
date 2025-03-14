@@ -254,13 +254,15 @@ export const useWordActions = (
         });
       }
 
-      const timeoutForUpdate = setTimeout(
-        () => {
+      // Костыль, чтобы на мобильных устройствах не было видно, какой элемент был нажат
+      if (mobileMediaQueryWidth.matches) {
+        const timeoutForUpdate = setTimeout(() => {
           updateRandomWord();
           clearTimeout(timeoutForUpdate);
-        },
-        mobileMediaQueryWidth.matches ? 150 : 0,
-      );
+        }, 150);
+      } else {
+        updateRandomWord();
+      }
     },
     [
       changeWordConsecutivelyTimes,
