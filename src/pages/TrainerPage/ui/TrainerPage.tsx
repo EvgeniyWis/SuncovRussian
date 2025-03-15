@@ -24,10 +24,7 @@ import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
 import { useWordActions } from '../lib/hooks/useWordActions';
-import {
-  laptopMediaQueryWidth,
-  timeoutDurationForRender,
-} from '@/shared/const/global';
+import { laptopMediaQueryWidth } from '@/shared/const/global';
 import { generateTrainerWords } from '../config/generateTrainerWords';
 import {
   addRefEventListener,

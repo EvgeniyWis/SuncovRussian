@@ -10,7 +10,7 @@ const meta = {
   title: 'Pages/Trainer/TrainerChoiceWords',
   component: TrainerChoiceWords,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof TrainerChoiceWords>;
 
@@ -20,13 +20,13 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     randomWord: (
-      wordsForTrainers['разряды союзов'].items as ChoiceWordInterface[]
+      wordsForTrainers['Разряды союзов'].items as ChoiceWordInterface[]
     )[0],
     showNewWord: () => {},
     wordOnFail: () => {},
     wordOnSuccess: () => {},
     categories: (
-      wordsForTrainers['разряды союзов'] as ChoiceWordsForTrainersItem
+      wordsForTrainers['Разряды союзов'] as ChoiceWordsForTrainersItem
     ).categories,
   },
 };

@@ -29,14 +29,14 @@ export const TrainerUnionsWords: Story = {
 
 export const TrainerChoiceWords: Story = {
   args: {
-    words: wordsForTrainers['разряды союзов'],
+    words: wordsForTrainers['Разряды союзов'],
     theme: 'разряды союзов',
   },
 };
 
 export const TrainerWithMissedLettersWords: Story = {
   args: {
-    words: wordsForTrainers['словарные слова'],
+    words: wordsForTrainers['Словарные слова'],
     theme: 'словарные слова',
   },
 };
