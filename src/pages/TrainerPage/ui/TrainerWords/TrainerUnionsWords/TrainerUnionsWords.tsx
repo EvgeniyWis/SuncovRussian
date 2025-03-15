@@ -4,7 +4,7 @@ import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import * as styles from './TrainerUnionsWords.module.scss';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   wordActionsFunctionType,
   wordActionsFunctionExtendType,
@@ -20,7 +20,7 @@ interface TrainerUnionsWordsProps {
 export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
   ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
     // Инициализация данных и контекста
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (

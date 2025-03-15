@@ -1,7 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import { Fragment, memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../../model/types/primary';
@@ -25,7 +25,7 @@ export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(
     wordOnSuccess,
   }): React.JSX.Element => {
     // Инициализация данных и контекста
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     // Функция для показа слова

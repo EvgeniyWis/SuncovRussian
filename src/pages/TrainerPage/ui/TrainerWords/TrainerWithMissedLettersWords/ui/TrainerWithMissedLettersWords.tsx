@@ -11,7 +11,7 @@ import { renderLetter } from '../lib/renderLetter';
 import { onContinueHandler } from '../lib/onContinueHandler';
 import { continueOnKeyDown } from '../lib/continueOnKeyDown';
 import { MissedLetterInputContext } from '@/shared/ui/MissedLetterInput';
-import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../../model/context/TrainerPageContext';
 import { renderCorrectWord } from '../lib/renderCorrectWord';
 
@@ -31,7 +31,7 @@ export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWor
       useContext(TrainerPageContext);
 
     // Получаем данные из хранилища
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
 
     // Добавляем обработчик нажатия клавиши Enter
     useEffect(() => {

@@ -15,6 +15,7 @@ import {
   ChoiceWordsForTrainersItem,
 } from '../model/types/choice';
 import { transliterate } from '@/shared/utils/transliterate';
+import { WordsForTrainersItem } from '../model/types/types';
 
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
@@ -118,29 +119,27 @@ describe('TrainerPrimaryWords', () => {
 
   // Tests
   test('Click valid words and not get an error, check progress bar', async () => {
-    await waitFor(async () => {
-      // Кликаем на правильные слова
-      await clickWordAndCheckUncorrectBar(
-        'TrainerPrimaryWords__valid',
-        false,
-        component,
-      );
+    // Кликаем на правильные слова
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-      await clickWordAndCheckUncorrectBar(
-        'TrainerPrimaryWords__valid',
-        false,
-        component,
-      );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-      await clickWordAndCheckUncorrectBar(
-        'TrainerPrimaryWords__valid',
-        false,
-        component,
-      );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-      // Прогресс бар должен увеличиться
-      await checkProgressBarValue(0, component, 'greaterThan');
-    });
+    // Прогресс бар должен увеличиться
+    await checkProgressBarValue(0, component, 'greaterThan');
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
@@ -193,115 +192,107 @@ describe('TrainerPrimaryWords', () => {
   });
 });
 
-// describe('TrainerModeSwitcher', () => {
-//   // Helpers
-//   // Функция для клика на режим
-//   const clickMode = async (
-//     component: RenderResult<typeof queries, HTMLElement, HTMLElement>,
-//     mode: ModeTypes,
-//   ) => {
-//     const modeItem = component.getByTestId(`ModeSwitcherItem__${mode}`);
+describe('TrainerModeSwitcher', () => {
+  // Helpers
+  // Функция для клика на режим
+  const clickMode = async (
+    component: RenderResult<typeof queries, HTMLElement, HTMLElement>,
+    mode: ModeTypes,
+  ) => {
+    await waitFor(async () => {
+      const modeItem = component.getByTestId(
+        `ModeSwitcherItem__${mode.replace(' ', '-')}`,
+      );
 
-//     await userEvent.click(modeItem);
+      await userEvent.click(modeItem);
 
-//     // Проверяем, что режим выбран
-//     expect(modeItem).toHaveAttribute('data-selected', 'true');
-//   };
+      // Проверяем, что режим выбран
+      expect(modeItem).toHaveAttribute('data-selected', 'true');
+    });
+  };
 
-//   // Функция для генерации блока-теста
-//   const generateTestBlock = (name: string, theme: string) => {
-//     return describe(name, () => {
-//       // BeforeEach
-//       let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
+  // BeforeEach
+  const theme: string = 'Ударения';
 
-//       beforeEach(async () => {
-//         await waitFor(() => {
-//           component = setupTest(theme);
-//         });
-//       });
+  let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 
-//       test('Click one life mode, check progress bar', async () => {
-//         // Выбираем режим "Одна жизнь"
-//         await clickMode(component, 'Одна жизнь');
+  beforeEach(async () => {
+    await waitFor(() => {
+      component = setupTest(theme);
+    });
+  });
 
-//         // Кликаем на правильные слова
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__valid',
-//           false,
-//           component,
-//         );
+  test('Click one life mode, check progress bar', async () => {
+    // Выбираем режим "Одна жизнь"
+    await clickMode(component, 'Одна жизнь');
 
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__valid',
-//           false,
-//           component,
-//         );
+    // Кликаем на правильные слова
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__valid',
-//           false,
-//           component,
-//         );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-//         // Кликаем на неправильное слово
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__invalid',
-//           true,
-//           component,
-//         );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__valid',
+      false,
+      component,
+    );
 
-//         // Прогресс бар должен быть равен нулю
-//         await checkProgressBarValue(0, component);
-//       });
+    // Кликаем на неправильное слово
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__invalid',
+      true,
+      component,
+    );
 
-//       test('Click check mode, check progress bar', async () => {
-//         // Выбираем режим "Проверка"
-//         await clickMode(component, 'Проверка');
+    // Прогресс бар должен быть равен нулю
+    await checkProgressBarValue(0, component);
+  });
 
-//         // Кликаем на неправильные слова
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__invalid',
-//           true,
-//           component,
-//         );
+  test('Click check mode, check progress bar', async () => {
+    // Выбираем режим "Проверка"
+    await clickMode(component, 'Проверка');
 
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__invalid',
-//           true,
-//           component,
-//         );
+    // Кликаем на неправильные слова
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__invalid',
+      true,
+      component,
+    );
 
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__invalid',
-//           true,
-//           component,
-//         );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__invalid',
+      true,
+      component,
+    );
 
-//         await clickWordAndCheckUncorrectBar(
-//           'TrainerPrimaryWords__invalid',
-//           true,
-//           component,
-//         );
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__invalid',
+      true,
+      component,
+    );
 
-//         // Прогресс бар должен увеличиться
-//         await checkProgressBarValue(0, component, 'greaterThan');
-//       });
-//     });
-//   };
+    await clickWordAndCheckUncorrectBar(
+      'TrainerPrimaryWords__invalid',
+      true,
+      component,
+    );
 
-//   // Tests
-//   generateTestBlock('PrimaryWords', 'Ударения');
+    // Прогресс бар должен увеличиться
+    await checkProgressBarValue(0, component, 'greaterThan');
+  });
 
-//   generateTestBlock('ChoiceWords', 'разряды союзов');
-
-//   generateTestBlock('WithMissedLettersWords', 'словарные слова');
-
-//   generateTestBlock('UnionsWords', 'Виды союзов');
-
-//   afterEach(() => {
-//     cleanup();
-//   });
-// });
+  afterEach(() => {
+    cleanup();
+  });
+});
 
 describe('TrainerChoiceWords', () => {
   // Helpers
@@ -353,6 +344,9 @@ describe('TrainerChoiceWords', () => {
 
       // Кликаем на правильное слово, чтобы убрать плашку
       await userEvent.click(correctWord);
+
+      // Проверяем, убралась ли плашка "Неверно" или нет
+      await checkUncorrectBar(component, false, false);
     }
   };
 
@@ -382,10 +376,13 @@ describe('TrainerChoiceWords', () => {
   test('Click invalid choiceWord and valid choiceWord and get an error, check progress bar', async () => {
     await waitFor(async () => {
       // Получаем текущее слово и его значения
-      const currentWordValues = getCurrentWord();
+      let currentWordValues = getCurrentWord();
 
       // Кликаем на неправильный вариант ответа
       await clickChoiceWord(currentWordValues, false);
+
+      // Получаем новое текущее слово и его значения
+      currentWordValues = getCurrentWord();
 
       // Кликаем на правильный вариант ответа
       await clickChoiceWord(currentWordValues, true);
@@ -412,6 +409,23 @@ describe('TrainerChoiceWords', () => {
 describe('TrainerWithMissedLettersWords', () => {
   // Mocks
   const theme: string = 'Словарные слова';
+  const mockWords: WordsForTrainersItem = {
+    type: 'withMissedLetters',
+    inHeader: true,
+
+    items: [
+      {
+        word: 'тишина',
+        missedLettersIndexes: [4],
+        id: 0,
+      },
+      {
+        word: 'белизна',
+        missedLettersIndexes: [4],
+        id: 1,
+      },
+    ],
+  };
 
   // Функция для получения пропущенной буквы и вписывания туда правильной буквы
   const getMissedLetterAndInputCorrectLetter = async (letter: string) => {
@@ -438,7 +452,10 @@ describe('TrainerWithMissedLettersWords', () => {
 
   beforeEach(async () => {
     await waitFor(() => {
-      component = setupTest(theme);
+      component = renderWithProviders(
+        <TrainerPage theme={theme} words={mockWords} />,
+        getRouteTrainer(transliterate(theme)),
+      );
     });
   });
 

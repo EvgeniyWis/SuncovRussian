@@ -19,7 +19,7 @@ export type { TrainerPageSliceSchema } from './model/types/sliceTypes';
 
 export type { WordsForTrainersTypes } from './model/types/types';
 
-export { useWords } from './model/selectors/getTrainerWords/getTrainerWords';
+export { useTrainerWords } from './model/selectors/getTrainerWords/getTrainerWords';
 
 export { TrainerPageContext } from './model/context/TrainerPageContext';
 

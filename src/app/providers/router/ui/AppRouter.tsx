@@ -18,7 +18,8 @@ export const AppRouter: React.FC = memo(() => {
   }, []);
 
   // Делаем конфиг с роутами стейтом
-  const [routes, setRoutes] = useState<Record<AppRoutes, RouteProps>>();
+  const [routes, setRoutes] =
+    useState<Record<AppRoutes, RouteProps>>(routeConfig);
 
   // Получаем хуки для фетча данных с бека
   const { fetchTestsRoutes } = useFetchTestsRoutes();
@@ -34,7 +35,6 @@ export const AppRouter: React.FC = memo(() => {
 
       setRoutes((prevRoutes) => ({
         ...prevRoutes,
-        ...routeConfig,
         ...testsRoutes,
         ...dictantsRoutes,
         ...partsOfSpeachRoutes,

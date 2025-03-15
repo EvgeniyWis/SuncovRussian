@@ -1,7 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TrainerTotalResult.module.scss';
 import { Fragment, memo, useCallback, useContext, useMemo } from 'react';
-import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   WordsForTrainersItem,
   WordsForTrainersTypes,
@@ -32,7 +32,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
     } = useContext(TrainerPageContext);
 
     // Инициализация хуков и контекста
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
     const { setWords } = useTrainerActions();
 
     const { totalTime, setTotalTime, isErrorWork, setIsErrorWork } =

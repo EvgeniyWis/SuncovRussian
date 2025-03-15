@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { WordsForTrainersTypes } from '../../model/types/types';
-import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 
 interface UseRandomWordResult {
   updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
@@ -12,7 +12,7 @@ export const useRandomWord = (
   setRandomWordsIsReverse: React.Dispatch<React.SetStateAction<boolean>>,
   setRandomWordId: React.Dispatch<React.SetStateAction<number | null>>,
 ): UseRandomWordResult => {
-  const storeWords = useWords();
+  const storeWords = useTrainerWords();
 
   const randomWord = useMemo(
     () => storeWords.find((word) => word.id === randomWordId),

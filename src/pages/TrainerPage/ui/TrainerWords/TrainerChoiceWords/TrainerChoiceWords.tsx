@@ -5,7 +5,7 @@ import {
   ChoiceWordsCategory,
 } from '../../../model/types/choice';
 import { Flex } from '@/shared/lib/Stack';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { clearClassesOnWord } from './lib/clearClassesOnWord';
 import { ChoiceWordOnClick } from './lib/choiceWordOnClick';
@@ -31,7 +31,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
     showNewWord,
   }): React.JSX.Element => {
     // Инициализация данных и контекста
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
     const { isErrorWork, isIncorrect } = useContext(TrainerPageContext);
 
     // При новом слове производим очистку классов у слов

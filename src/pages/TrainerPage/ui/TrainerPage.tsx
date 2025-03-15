@@ -15,7 +15,7 @@ import {
 } from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
-import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
@@ -75,7 +75,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     );
 
     // Получение случайного слова
-    const storeWords = useWords();
+    const storeWords = useTrainerWords();
 
     useEffect(() => {
       if (storeWords.length && randomWordId === null) {

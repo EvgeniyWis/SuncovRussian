@@ -1,5 +1,5 @@
 import { useTrainerActions } from '../../../../model/slice/TrainerPageSlice';
-import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
 import { useCallback } from 'react';
 import { ModeSwitcherItemProps } from '@/widgets/ModeSwitcher';
 
@@ -12,7 +12,7 @@ export const useFocusMode = (
   setFocusModeIsOn: (focusModeIsOn: boolean) => void,
 ): useFocusModeResult => {
   // Строгий режим
-  const storeWords = useWords();
+  const storeWords = useTrainerWords();
 
   const {
     changeWordProbability,

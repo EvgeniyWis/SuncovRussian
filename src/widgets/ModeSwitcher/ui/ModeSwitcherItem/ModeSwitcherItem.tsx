@@ -32,7 +32,7 @@ export const ModeSwitcherItem: React.FC<ModeSwitcherItemProps> = memo(
             onClick={handleClick}
             className={styles.ModeSwitcherItem__switcher}
             justify="center"
-            data-testid={`ModeSwitcherItem__${name}`}
+            data-testid={`ModeSwitcherItem__${name.replace(' ', '-')}`}
             data-selected={modeIsOn}
           >
             <СheckmarkSVG

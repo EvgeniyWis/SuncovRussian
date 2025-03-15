@@ -3,7 +3,7 @@ import { useRandomWord } from '../useRandomWord';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 import { playSound } from '@/shared/utils/playSound';
 import { useInitializeWords } from '../useInitializeWords';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { mobileMediaQueryWidth } from '@/shared/const/global';
 import { isInJest } from '@/shared/tests/isInJest';
@@ -32,7 +32,7 @@ export const useWordActions = (
     changeWordInProgressStatus,
   } = useTrainerActions();
 
-  const storeWords = useWords();
+  const storeWords = useTrainerWords();
 
   const { initializeWords } = useInitializeWords(storeWords);
 
