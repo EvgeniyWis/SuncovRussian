@@ -65,10 +65,6 @@ export const useWordActions = (
         main.style.pointerEvents = 'all';
       }
 
-      // Удаляем обработчики событий
-      deleteRefEventListener(keydownEventListenerRef, 'keydown');
-      deleteRefEventListener(clickEventListenerRef, 'click');
-
       // Функционал показа нового слова
       if (isOneLifeMode) {
         initializeWords();
