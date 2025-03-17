@@ -1,3 +1,4 @@
+import { AccentsWordsForTrainersItem, AccentsWordsInterface } from './accents';
 import { ChoiceWordInterface, ChoiceWordsForTrainersItem } from './choice';
 import { PrimaryWordsForTrainersItem, PrimaryWordsInterface } from './primary';
 import { UnionsWordsForTrainersItem, UnionsWordsInterface } from './unions';
@@ -10,7 +11,8 @@ export type TrainerWordsType =
   | 'unions'
   | 'primary'
   | 'choice'
-  | 'withMissedLetters';
+  | 'withMissedLetters'
+  | 'accents';
 
 export interface TrainerWordsInterface {
   id: number;
@@ -25,7 +27,8 @@ export type WordsForTrainersTypes =
   | PrimaryWordsInterface
   | UnionsWordsInterface
   | ChoiceWordInterface
-  | WithMissedLettersWordsInterface;
+  | WithMissedLettersWordsInterface
+  | AccentsWordsInterface;
 
 export interface WordsForTrainersGeneralItem {
   type: TrainerWordsType;
@@ -37,7 +40,8 @@ export type WordsForTrainersItem =
   | PrimaryWordsForTrainersItem
   | UnionsWordsForTrainersItem
   | ChoiceWordsForTrainersItem
-  | WithMissedLettersWordsForTrainersItem;
+  | WithMissedLettersWordsForTrainersItem
+  | AccentsWordsForTrainersItem;
 
 export type WordsForTrainers = {
   [key in string]: WordsForTrainersItem;
