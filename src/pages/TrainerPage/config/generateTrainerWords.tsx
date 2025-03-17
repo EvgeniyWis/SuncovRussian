@@ -20,6 +20,7 @@ import { TrainerPrimaryWords } from '../ui/TrainerWords/TrainerPrimaryWords/Trai
 import { TrainerUnionsWords } from '../ui/TrainerWords/TrainerUnionsWords/TrainerUnionsWords';
 import { TrainerWithMissedLettersWords } from '../ui/TrainerWords/TrainerWithMissedLettersWords';
 import { TrainerAccentsWords } from '../ui/TrainerWords/TrainerAccentsWords/TrainerAccentsWords';
+import { AccentsWordsInterface } from '../model/types/accents';
 
 type TrainerWords = {
   [key in TrainerWordsType]: React.ReactNode;
@@ -71,6 +72,12 @@ export const generateTrainerWords = (
       </MissedLetterInputProvider>
     ),
 
-    accents: <TrainerAccentsWords />,
+    accents: (
+      <TrainerAccentsWords
+        randomWord={randomWord as AccentsWordsInterface}
+        wordOnSuccess={wordOnSuccess}
+        wordOnFail={wordOnFail}
+      />
+    ),
   };
 };
