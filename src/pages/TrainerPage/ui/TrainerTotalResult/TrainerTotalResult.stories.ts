@@ -18,5 +18,6 @@ export const Primary: Story = {
     words: wordsForTrainers['Ударения'],
     updateRandomWord: () => {},
     theme: 'Ударения',
+    type: 'primary',
   },
 };

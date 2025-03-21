@@ -21,3 +21,15 @@ export const mobileMediaQueryWidth: MediaQueryList =
   window.matchMedia('(max-width: 600px)');
 
 export const timeoutDurationForRender: number = 0;
+
+export const vowelsArray: string[] = [
+  'а',
+  'ы',
+  'я',
+  'э',
+  'е',
+  'о',
+  'и',
+  'ю',
+  'ё',
+];

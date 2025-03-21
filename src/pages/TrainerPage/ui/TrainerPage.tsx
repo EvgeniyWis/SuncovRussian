@@ -94,7 +94,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     );
 
     useEffect(() => {
-      if (['choice', 'withMissedLetters'].includes(words.type)) return;
+      if (!['primary', 'unions'].includes(words.type)) return;
 
       addRefEventListener(
         keydownEventListenerRef,
@@ -194,6 +194,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                 words={words}
                 updateRandomWord={updateRandomWord}
                 theme={theme}
+                type={words.type}
               />
             )}
           </>

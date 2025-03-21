@@ -75,8 +75,8 @@ export const generateTrainerWords = (
     accents: (
       <TrainerAccentsWords
         randomWord={randomWord as AccentsWordsInterface}
-        wordOnSuccess={wordOnSuccess}
-        wordOnFail={wordOnFail}
+        onSuccess={wordOnSuccess}
+        onFail={wordOnFail}
       />
     ),
   };

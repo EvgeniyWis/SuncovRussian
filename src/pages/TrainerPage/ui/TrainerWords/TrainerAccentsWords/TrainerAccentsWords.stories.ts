@@ -19,7 +19,7 @@ export const Primary: Story = {
       accentIndex: 6,
       id: 0,
     },
-    wordOnSuccess: () => {},
-    wordOnFail: () => {},
+    onSuccess: () => {},
+    onFail: () => {},
   },
 };

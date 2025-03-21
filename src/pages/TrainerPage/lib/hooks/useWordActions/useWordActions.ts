@@ -58,6 +58,10 @@ export const useWordActions = (
   // Показ нового слова
   const showNewWord: wordActionsFunctionType = useCallback(
     (words, isErrorWork, randomWordId) => {
+      // Удаляем обработчики событий
+      deleteRefEventListener(clickEventListenerRef, 'click');
+      deleteRefEventListener(keydownEventListenerRef, 'keydown');
+
       // Изменяем стили обратно
       const main: HTMLElement = document.querySelector('main')!;
 

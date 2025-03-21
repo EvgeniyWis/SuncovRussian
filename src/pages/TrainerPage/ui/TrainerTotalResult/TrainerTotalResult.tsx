@@ -3,6 +3,7 @@ import * as styles from './TrainerTotalResult.module.scss';
 import { Fragment, memo, useCallback, useContext, useMemo } from 'react';
 import { useTrainerWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import {
+  TrainerWordsType,
   WordsForTrainersItem,
   WordsForTrainersTypes,
 } from '../../model/types/types';
@@ -19,10 +20,11 @@ interface TrainerTotalResultProps {
   updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
   words: WordsForTrainersItem;
   theme: string;
+  type: TrainerWordsType;
 }
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
-  ({ updateRandomWord, words, theme }): React.JSX.Element => {
+  ({ updateRandomWord, words, theme, type }): React.JSX.Element => {
     // Получение режимов, с которыми пользователь прошёл тренажёр и кол-ва ошибок
     const {
       isCheckMode,
@@ -144,17 +146,23 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
-                    {generateBlockWithUncorrectWordArray(word).map((item) => (
-                      <Fragment key={item.type}>
-                        {generateBlockWithUncorrectWord({
-                          wordObject: word,
-                          words,
-                          type: item.type,
-                          word: item.word,
-                          validWord: item.validWord,
-                        })}
-                      </Fragment>
-                    ))}
+                    {(() => {
+                      const item = generateBlockWithUncorrectWordArray(
+                        word,
+                      ).find((item) => item.type === type)!;
+
+                      return (
+                        <>
+                          {generateBlockWithUncorrectWord({
+                            wordObject: word,
+                            words,
+                            type: item.type,
+                            word: item.word,
+                            validWord: item.validWord,
+                          })}
+                        </>
+                      );
+                    })()}
                   </span>
                 ))}
               </Flex>

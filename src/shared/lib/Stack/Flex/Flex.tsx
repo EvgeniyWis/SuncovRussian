@@ -121,6 +121,7 @@ export interface FlexProps extends DivProps {
   width?: FlexWitdth;
   innerRef?: React.Ref<HTMLDivElement>;
   relative?: boolean;
+  inline?: boolean;
 }
 
 export const Flex = (props: FlexProps) => {
@@ -136,6 +137,7 @@ export const Flex = (props: FlexProps) => {
     wrap,
     width,
     relative,
+    inline,
     ...otherProps
   } = props;
 
@@ -150,6 +152,7 @@ export const Flex = (props: FlexProps) => {
     maxHeight && styles.maxHeight,
     relative && styles.relative,
     wrap && styles.wrap,
+    inline && styles.inline,
   ];
 
   return (

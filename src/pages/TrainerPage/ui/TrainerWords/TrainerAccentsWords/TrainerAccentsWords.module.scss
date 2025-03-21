@@ -2,5 +2,53 @@
   &__letter {
     font-weight: 500;
     font-size: 60px;
+    position: relative;
+    bottom: 3px;
+
+    &Wrapper {
+      height: 55px;
+      width: 45px;
+
+      &__vowel {
+        transition: var(--transition-duration-default) linear;
+        transition-property: background-color, color;
+        cursor: pointer;
+        border-radius: 100%;
+        position: relative;
+
+        &::before {
+          content: '`';
+          top: -45px;
+          right: 25px;
+          position: absolute;
+          transform: rotate(90deg);
+          opacity: 0;
+          color: var(--color-black);
+          font-size: 60px;
+          transition: linear var(--transition-duration-default) opacity;
+        }
+
+        &:hover {
+          background-color: var(--color-black);
+          color: var(--color-white);
+
+          &::before {
+            opacity: 1;
+          }
+        }
+
+        &__incorrect {
+          background-color: var(--color-gray);
+          color: var(--color-white);
+        }
+
+        &__correct {
+          &::before {
+            opacity: 1;
+            top: -35px;
+          }
+        }
+      }
+    }
   }
 }

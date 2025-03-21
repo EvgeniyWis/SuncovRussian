@@ -8,6 +8,7 @@ import {
 import { ChoiceWordInterface } from '../../../model/types/choice';
 import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
 import { renderCorrectWord } from '../../TrainerWords/TrainerWithMissedLettersWords/lib/renderCorrectWord';
+import { AccentsWordsInterface } from '../../../model/types/accents';
 
 interface GenerateBlockWithUncorrectWordProps {
   wordObject: WordsForTrainersTypes;
@@ -41,6 +42,20 @@ export const generateBlockWithUncorrectWordArray = (
   {
     type: 'withMissedLetters',
     word: renderCorrectWord(word as WithMissedLettersWordsInterface, 'small'),
+  },
+
+  {
+    type: 'accents',
+    word:
+      (word as AccentsWordsInterface).word &&
+      (word as AccentsWordsInterface).word.slice(
+        0,
+        (word as AccentsWordsInterface).accentIndex,
+      ) +
+        '́' +
+        (word as AccentsWordsInterface).word.slice(
+          (word as AccentsWordsInterface).accentIndex,
+        ),
   },
 ];
 
