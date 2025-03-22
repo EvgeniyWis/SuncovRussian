@@ -11,8 +11,6 @@ import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTra
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { letterOnClickHandler } from './letterOnClickHandler/letterOnClickHandler';
 
-// TODO: написать тесты
-
 export interface TrainerAccentsWordsProps {
   randomWord: AccentsWordsInterface;
   onSuccess: wordActionsFunctionType;
@@ -33,6 +31,9 @@ export const TrainerAccentsWords: React.FC<TrainerAccentsWordsProps> = memo(
         <Flex>
           {randomWord.word.split('').map((letter, index) => (
             <Flex
+              data-testid={
+                vowelsArray.includes(letter) ? 'TrainerAccentsWords__vowel' : ''
+              }
               className={`${styles.TrainerAccentsWords__letterWrapper}
               ${vowelsArray.includes(letter) ? styles.TrainerAccentsWords__letterWrapper__vowel : ''}
               ${isIncorrect && incorrectVowelIndex === index ? styles.TrainerAccentsWords__letterWrapper__vowel__incorrect : ''}
@@ -53,7 +54,10 @@ export const TrainerAccentsWords: React.FC<TrainerAccentsWordsProps> = memo(
                   : undefined
               }
             >
-              <span className={styles.TrainerAccentsWords__letter}>
+              <span
+                data-testid="TrainerAccentsWords__letter"
+                className={styles.TrainerAccentsWords__letter}
+              >
                 {letter}
               </span>
             </Flex>

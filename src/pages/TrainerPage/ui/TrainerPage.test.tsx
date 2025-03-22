@@ -106,7 +106,7 @@ const setupTest = (theme: string) => {
 // Tests
 describe('TrainerPrimaryWords', () => {
   // Helpers
-  const theme: string = 'Ударения';
+  const theme: string = 'Наречия';
 
   // BeforeEach
   let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
@@ -212,7 +212,7 @@ describe('TrainerModeSwitcher', () => {
   };
 
   // BeforeEach
-  const theme: string = 'Ударения';
+  const theme: string = 'Наречия';
 
   let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 
@@ -606,6 +606,112 @@ describe('TrainerUnionsWords', () => {
       true,
       component,
     );
+
+    // Прогресс бар должен быть равен нулю
+    await checkProgressBarValue(0, component);
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+});
+
+describe('TrainerAccentsWords', () => {
+  // Mocks
+  const theme: string = 'Ударения';
+
+  const mockAccentIndex: number = 6;
+
+  const mockWords: WordsForTrainersItem = {
+    type: 'accents',
+    inHeader: true,
+
+    items: [
+      {
+        word: 'аэропорты',
+        accentIndex: mockAccentIndex,
+        id: 0,
+      },
+      {
+        word: 'дешевизна',
+        accentIndex: mockAccentIndex,
+        id: 1,
+      },
+    ],
+  };
+
+  // Helpers
+  // Функция для получения и нажатия на букву
+  const getAndClickVowel = async (isCorrect: boolean) => {
+    // Получаем все данные
+    const vowels = component.getAllByTestId('TrainerAccentsWords__vowel');
+    const letters = component.getAllByTestId('TrainerAccentsWords__letter');
+
+    const accentElemIndex = mockAccentIndex - 1;
+
+    // Кликаем на соответствующие буквы при условии, что верно и неверно
+    if (!isCorrect) {
+      const incorrectVowel = vowels.find(
+        (_, index) => index !== accentElemIndex,
+      )!;
+
+      await userEvent.click(incorrectVowel);
+    } else {
+      const correctVowel = letters.find(
+        (_, index) => index === accentElemIndex,
+      )!;
+
+      await userEvent.click(correctVowel);
+    }
+
+    // Проверяем в случае неправильности плашку
+    if (!isCorrect) {
+      await checkUncorrectBar(component, true, true);
+    }
+  };
+
+  // BeforeEach
+  let component: ReturnType<typeof setupTest>;
+
+  beforeEach(async () => {
+    await waitFor(() => {
+      component = renderWithProviders(
+        <TrainerPage theme={theme} words={mockWords} />,
+        getRouteTrainer(transliterate(theme)),
+      );
+    });
+  });
+
+  // Tests
+  test('Click valid vowels and not get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Кликаем на правильную букву
+      await getAndClickVowel(true);
+
+      // Прогресс бар должен увеличиться
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
+
+  test('Click invalid vowel and valid vowel and get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Кликаем на неправильную букву
+      await getAndClickVowel(false);
+
+      // Кликаем на правильную букву
+      await getAndClickVowel(true);
+
+      // Прогресс бар должен увеличиться, потому что правильное слово было кликнуто
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
+
+  test('Click invalid vowels, check progress bar', async () => {
+    // Кликаем на неправильную букву
+    await getAndClickVowel(false);
+
+    // Кликаем на неправильную букву
+    await getAndClickVowel(false);
 
     // Прогресс бар должен быть равен нулю
     await checkProgressBarValue(0, component);
