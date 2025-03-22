@@ -24,12 +24,13 @@ export const timeoutDurationForRender: number = 0;
 
 export const vowelsArray: string[] = [
   'а',
-  'ы',
-  'я',
-  'э',
   'е',
-  'о',
-  'и',
-  'ю',
   'ё',
+  'и',
+  'о',
+  'у',
+  'ы',
+  'э',
+  'ю',
+  'я',
 ];
