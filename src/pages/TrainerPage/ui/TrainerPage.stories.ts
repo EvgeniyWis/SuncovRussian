@@ -6,7 +6,7 @@ const meta = {
   title: 'Pages/Trainer',
   component: TrainerPage,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'center',
   },
 } satisfies Meta<typeof TrainerPage>;
 
@@ -14,6 +14,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const TrainerPrimaryWords: Story = {
+  args: {
+    words: wordsForTrainers['Наречия'],
+    theme: 'Наречия',
+  },
+};
+
+export const TrainerAccentsWords: Story = {
   args: {
     words: wordsForTrainers['Ударения'],
     theme: 'Ударения',

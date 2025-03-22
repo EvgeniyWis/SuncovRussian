@@ -21,7 +21,6 @@ const config: StorybookConfig = {
     options: {
       builder: {
         fsCache: true,
-        lazyCompilation: true,
       },
     },
   },
