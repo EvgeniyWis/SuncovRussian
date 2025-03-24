@@ -1,5 +1,5 @@
-import { WordsForTrainersTypes } from '../../../../model/types/types';
-import { TrainerAccentsWordsProps } from '../TrainerAccentsWords';
+import { WordsForTrainersTypes } from '../../../../../../model/types/types';
+import { TrainerAccentsWordsProps } from '../../../TrainerAccentsWords';
 
 export const letterOnClickHandler = (
   params: TrainerAccentsWordsProps,
