@@ -132,7 +132,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 24,
       },
       {
-        word: 'свёкла',
+        word: 'свекла',
         accentIndex: 3,
         id: 25,
       },
@@ -407,7 +407,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 79,
       },
       {
-        word: 'щёлкать',
+        word: 'щелкать',
         accentIndex: 2,
         id: 80,
       },
@@ -457,32 +457,32 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 89,
       },
       {
-        word: 'низведённый',
+        word: 'низведенный',
         accentIndex: 7,
         id: 90,
       },
       {
-        word: 'облегчённый',
+        word: 'облегченный',
         accentIndex: 7,
         id: 91,
       },
       {
-        word: 'ободрённый',
+        word: 'ободренный',
         accentIndex: 6,
         id: 92,
       },
       {
-        word: 'обострённый',
+        word: 'обостренный',
         accentIndex: 7,
         id: 93,
       },
       {
-        word: 'отключённый',
+        word: 'отключенный',
         accentIndex: 7,
         id: 94,
       },
       {
-        word: 'поделённый',
+        word: 'поделенный',
         accentIndex: 6,
         id: 95,
       },
@@ -497,7 +497,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 97,
       },
       {
-        word: 'приручённый',
+        word: 'прирученный',
         accentIndex: 7,
         id: 98,
       },
@@ -517,7 +517,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 101,
       },
       {
-        word: 'углублённый',
+        word: 'углубленный',
         accentIndex: 7,
         id: 102,
       },
