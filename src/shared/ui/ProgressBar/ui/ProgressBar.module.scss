@@ -1,4 +1,4 @@
-.TrainerProgressBar {
+.ProgressBar {
   &__percent {
     font-weight: 500;
     font-size: 20px;
@@ -19,6 +19,12 @@
     &::-webkit-progress-value {
       background: var(--color-black);
       border-radius: 10px 0 0 10px;
+    }
+
+    &__full {
+      &::-webkit-progress-value {
+        border-radius: 10px;
+      }
     }
   }
 }

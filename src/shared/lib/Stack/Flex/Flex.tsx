@@ -42,7 +42,10 @@ export type FlexWitdth =
   | '85'
   | '90'
   | '95'
-  | '100';
+  | '100'
+  | '150'
+  | '165'
+  | '200';
 
 const justifyClasses: Record<FlexJustify, string> = {
   start: styles.justifyStart,
@@ -102,6 +105,9 @@ const widthClasses: Record<FlexWitdth, string> = {
   90: styles.width90,
   95: styles.width95,
   100: styles.width100,
+  150: styles.width150,
+  165: styles.width165,
+  200: styles.width200,
 };
 
 type DivProps = DetailedHTMLProps<

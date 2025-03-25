@@ -11,6 +11,8 @@ export const useCheckCorrectness = (
   setMaxCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>,
+  setProgressBarPercent: React.Dispatch<React.SetStateAction<number>>,
+  itemsLength: number,
 ): useCheckPartsOfSpeachItemCorrectnessResult => {
   const checkCorrectness = (): CheckButtonOnClickResult => {
     // Получаем все слова
@@ -56,9 +58,15 @@ export const useCheckCorrectness = (
     });
 
     // Обновляем стейты
-    setMaxCorrectAnswersCount(correctWordsIndexes.length);
+    const maxCorrectAnswersCount = correctWordsIndexes.length;
+    setMaxCorrectAnswersCount(maxCorrectAnswersCount);
     setCorrectAnswersCount(correctAnswersCount);
     setTestIsFailed(testIsFailed);
+
+    // Если всё правильно, то увеличиваем прогресс
+    if (correctAnswersCount === maxCorrectAnswersCount) {
+      setProgressBarPercent((prev) => prev + 100 / itemsLength / 100);
+    }
 
     // Возвращаем значения
     return {

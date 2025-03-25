@@ -18,6 +18,9 @@ import { useCheckCorrectness } from '@/features/PartsOfSpeachItem';
 
 export const PartsOfSpeachItemTemplate: React.FC = memo(
   (): React.JSX.Element => {
+    // Стейт для прогресс бара
+    const [progressBarPercent, setProgressBarPercent] = useState<number>(0);
+
     // Получаем данные из контекста
     const {
       maxCorrectAnswersCount,
@@ -49,6 +52,8 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       setMaxCorrectAnswersCount,
       setCorrectAnswersCount,
       setTestIsFailed,
+      setProgressBarPercent,
+      items.length,
     );
 
     // Получаем функцию продолжения
@@ -128,6 +133,7 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
             dataTestIdForButton={`PartsOfSpeachPage__button`}
             dataTestIdForDislike={`PartsOfSpeachPage__dislike`}
             dataTestIdForLike={`PartsOfSpeachPage__like`}
+            progressBarPercent={progressBarPercent}
           />
         )}
       </>

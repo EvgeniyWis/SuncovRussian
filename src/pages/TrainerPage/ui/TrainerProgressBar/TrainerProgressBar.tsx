@@ -1,8 +1,7 @@
-import { Flex } from '@/shared/lib/Stack';
 import { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { useTrainerWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
-import * as styles from './TrainerProgressBar.module.scss';
+import { ProgressBar } from '@/shared/ui/ProgressBar';
 
 export const TrainerProgressBar: React.FC = memo((): React.JSX.Element => {
   // Получение слов
@@ -44,16 +43,10 @@ export const TrainerProgressBar: React.FC = memo((): React.JSX.Element => {
   }, [setTotalTime, wordsInProgressProbabilityPercent]);
 
   return (
-    <Flex width="50" justify="center" gap="10">
-      <span className={styles.TrainerProgressBar__percent}>
-        {Math.round(wordsInProgressProbabilityPercent * 100)}%
-      </span>
-      <progress
-        className={styles.TrainerProgressBar__progressbar}
-        data-testid="Trainer__TrainerProgressBar__percent"
-        value={wordsInProgressProbabilityPercent}
-      ></progress>
-    </Flex>
+    <ProgressBar
+      percent={wordsInProgressProbabilityPercent}
+      progressDataTestID="Trainer__TrainerProgressBar__percent"
+    />
   );
 });
 

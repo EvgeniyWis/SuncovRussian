@@ -6,6 +6,7 @@ import DislikeSVG from '@/shared/assets/icons/DictantsPage/DislikeSVG.svg';
 import LikeSVG from '@/shared/assets/icons/DictantsPage/LikeSVG.svg';
 import { TemplateForTestsMark } from './TemplateForTestsMark/TemplateForTestsMark';
 import { playSound } from '@/shared/utils/playSound';
+import { ProgressBar } from '../../ProgressBar';
 
 export interface CheckButtonOnClickResult {
   testIsFailed: boolean;
@@ -28,6 +29,7 @@ interface TemplateForTestsProps {
   withDislike?: boolean;
   withResults?: boolean;
   withLike?: boolean;
+  progressBarPercent?: number;
 
   // For Tests
   dataTestIdForButton?: string;
@@ -52,6 +54,7 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
     dataTestIdForButton,
     dataTestIdForLike,
     dataTestIdForDislike,
+    progressBarPercent,
   }): React.JSX.Element => {
     // Если тест провален, то проигрываем соответствующий звук
     const checkButtonHandleClick = () => {
@@ -90,6 +93,10 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
 
         <Flex width="60" gap="30" justify="center" direction="column">
           {testElement}
+
+          {progressBarPercent !== undefined && (
+            <ProgressBar fullScreenWidth percent={progressBarPercent} />
+          )}
 
           <Flex
             width="100"
