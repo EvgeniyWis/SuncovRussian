@@ -44,6 +44,7 @@ export const TrainerProgressBar: React.FC = memo((): React.JSX.Element => {
 
   return (
     <ProgressBar
+      progressBarWidth="50"
       percent={wordsInProgressProbabilityPercent}
       progressDataTestID="Trainer__TrainerProgressBar__percent"
     />

@@ -95,7 +95,11 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
           {testElement}
 
           {progressBarPercent !== undefined && (
-            <ProgressBar fullScreenWidth percent={progressBarPercent} />
+            <ProgressBar
+              progressBarWidth="100"
+              percent={progressBarPercent}
+              canOverflow
+            />
           )}
 
           <Flex

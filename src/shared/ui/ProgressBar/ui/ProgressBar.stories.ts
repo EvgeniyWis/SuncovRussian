@@ -17,10 +17,3 @@ export const Primary: Story = {
     percent: 50,
   },
 };
-
-export const FullScreenWidth: Story = {
-  args: {
-    percent: 50,
-    fullScreenWidth: true,
-  },
-};

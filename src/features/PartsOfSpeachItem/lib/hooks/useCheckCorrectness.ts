@@ -64,7 +64,7 @@ export const useCheckCorrectness = (
     setTestIsFailed(testIsFailed);
 
     // Если всё правильно, то увеличиваем прогресс
-    if (correctAnswersCount === maxCorrectAnswersCount) {
+    if (correctAnswersCount === maxCorrectAnswersCount && !testIsFailed) {
       setProgressBarPercent((prev) => prev + 100 / itemsLength / 100);
     }
 

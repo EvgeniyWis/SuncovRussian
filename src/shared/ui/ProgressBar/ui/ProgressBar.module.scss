@@ -21,9 +21,25 @@
       border-radius: 10px 0 0 10px;
     }
 
-    &__full {
+    &__100 {
       &::-webkit-progress-value {
         border-radius: 10px;
+      }
+    }
+
+    &__canOverflow {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &__overflow {
+      border: none;
+      width: 20%;
+      position: absolute;
+      z-index: var(--z-index-hidden);
+      right: 10px;
+
+      &::-webkit-progress-value {
+        border-radius: 0;
       }
     }
   }
