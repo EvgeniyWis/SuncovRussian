@@ -160,6 +160,18 @@ Cборщик адаптирован под основные фичи прило
 
 ---
 
+## Сущности (entities)
+
+- [Theory Item](/src/entities/TheoryItem)
+
+## Фичи (features)
+
+- [Dictant](/src/features/Dictant)
+
+- [PartsOfSpeachItem](/src/features/PartsOfSpeachItem)
+
+- [Test](/src/features/Test)
+
 ## Прочие особенности:
 
 #### ● Использовано Upload Thing API для загрузки файлов в разделе "Теория".
