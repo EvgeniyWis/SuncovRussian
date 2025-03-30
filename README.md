@@ -12,8 +12,8 @@
 
 ## Скрипты
 
-- `npm run dev` - Запуск проекта в dev режиме на Vite
-- `npm run build` - Сборка проекта с помощью Vite
+- `npm run dev` - Запуск проекта в dev режиме на Webpack
+- `npm run build` - Сборка проекта с помощью Webpack
 - `npm run deploy` - Деплой проекта на Github Pages
 - `npm run lint:scss` - Запуск проверки scss файлов проекта с помощью styleLint
 - `npm run lint:scss:fix` - Запуск исправления scss файлов проекта, там где это возможно, с помощью styleLint
