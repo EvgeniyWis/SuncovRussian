@@ -20,10 +20,8 @@
 - `npm run lint:ts` - Запуск проверки ts файлов проекта с помощью esLint
 - `npm run lint:ts:fix` - Запуск исправления ts файлов проекта, там где это возможно, с помощью esLint
 - `npm run storybook` - запуск Storybook
-- `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
 - `npm run prettier` - запуск Prettier для форматирования кода
-- `npm run prepare` - Загрузка husky для прекоммит-хуков
 - `npm run test:e2e` - Запуск e2e тестов с Cypress
 
 ---
