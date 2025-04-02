@@ -1,14 +1,14 @@
 import { AccentsWordsForTrainersItem, AccentsWordsInterface } from './accents';
 import { ChoiceWordInterface, ChoiceWordsForTrainersItem } from './choice';
 import { PrimaryWordsForTrainersItem, PrimaryWordsInterface } from './primary';
-import { UnionsWordsForTrainersItem, UnionsWordsInterface } from './unions';
+import { ViewsWordsForTrainersItem, ViewsWordsInterface } from './views';
 import {
   WithMissedLettersWordsForTrainersItem,
   WithMissedLettersWordsInterface,
 } from './withMissedLetters';
 
 export type TrainerWordsType =
-  | 'unions'
+  | 'views'
   | 'primary'
   | 'choice'
   | 'withMissedLetters'
@@ -25,7 +25,7 @@ export interface TrainerWordsInterface {
 export type WordsForTrainersTypes =
   | TrainerWordsInterface
   | PrimaryWordsInterface
-  | UnionsWordsInterface
+  | ViewsWordsInterface
   | ChoiceWordInterface
   | WithMissedLettersWordsInterface
   | AccentsWordsInterface;
@@ -38,7 +38,7 @@ export interface WordsForTrainersGeneralItem {
 
 export type WordsForTrainersItem =
   | PrimaryWordsForTrainersItem
-  | UnionsWordsForTrainersItem
+  | ViewsWordsForTrainersItem
   | ChoiceWordsForTrainersItem
   | WithMissedLettersWordsForTrainersItem
   | AccentsWordsForTrainersItem;

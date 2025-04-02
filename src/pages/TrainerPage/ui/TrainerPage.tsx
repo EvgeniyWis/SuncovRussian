@@ -94,7 +94,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     );
 
     useEffect(() => {
-      if (!['primary', 'unions'].includes(words.type)) return;
+      if (!['primary', 'views'].includes(words.type)) return;
 
       addRefEventListener(
         keydownEventListenerRef,
@@ -146,12 +146,24 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                   </Flex>
                 )}
 
-                {words.type === 'unions' && (
+                {theme === 'Виды союзов' && (
                   <Flex width="100">
                     <Hint
                       text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
                     частица`}
+                      textClassName={styles.TrainerPage__hint}
+                    />
+                  </Flex>
+                )}
+
+                {theme === 'Звуки' && (
+                  <Flex width="100">
+                    <Hint
+                      text={`Помните, что глухие согласные произносятся без участия голоса, 
+                    а звонкие - с участием голоса. Чтобы проверить, приложите руку 
+                    к горлу: если вы чувствуете вибрацию - согласный звонкий, 
+                    если нет - глухой.`}
                       textClassName={styles.TrainerPage__hint}
                     />
                   </Flex>

@@ -8,7 +8,7 @@ import {
 import { TrainerPage } from './TrainerPage';
 import { getRouteTrainer } from '@/shared/const/router';
 import { wordsForTrainers } from '../model/static/wordsForTrainers';
-import { UnionsWordsInterface, unionTypes } from '../model/types/unions';
+import { ViewsWordsInterface } from '../model/types/views';
 import userEvent from '@testing-library/user-event';
 import {
   ChoiceWordInterface,
@@ -23,8 +23,7 @@ type ComparisonType = 'equal' | 'greaterThan';
 type WordsTestIDs =
   | 'TrainerPrimaryWords__valid'
   | 'TrainerPrimaryWords__invalid'
-  | 'TrainerUnionsWords__Подчинительный'
-  | 'TrainerUnionsWords__Сочинительный';
+  | string;
 
 type ModeTypes = 'Одна жизнь' | 'Проверка';
 
@@ -504,21 +503,21 @@ describe('TrainerWithMissedLettersWords', () => {
   });
 });
 
-describe('TrainerUnionsWords', () => {
+describe('TrainerViewsWords', () => {
   // Helpers
   const theme: string = 'Виды союзов';
 
   // Функция для получения типа текущего слова
-  const getTypeOfCurrentWord = (): unionTypes => {
-    const word = component.getByTestId('TrainerUnionsWords__word');
+  const getTypeOfCurrentWord = (): string => {
+    const word = component.getByTestId('TrainerViewsWords__word');
 
     expect(word).toBeInTheDocument();
 
     const currentWord = (word as HTMLElement).textContent;
 
     const wordCurrentType = (
-      wordsForTrainers['Виды союзов'].items as UnionsWordsInterface[]
-    ).find((word) => word.word === currentWord)!.unionType;
+      wordsForTrainers['Виды союзов'].items as ViewsWordsInterface[]
+    ).find((word) => word.word === currentWord)!.viewType;
 
     return wordCurrentType;
   };
@@ -540,19 +539,19 @@ describe('TrainerUnionsWords', () => {
 
       // Кликаем на правильные слова
       await clickWordAndCheckUncorrectBar(
-        `TrainerUnionsWords__${wordCurrentType}`,
+        `TrainerViewsWords__${wordCurrentType}`,
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        `TrainerUnionsWords__${wordCurrentType}`,
+        `TrainerViewsWords__${wordCurrentType}`,
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        `TrainerUnionsWords__${wordCurrentType}`,
+        `TrainerViewsWords__${wordCurrentType}`,
         false,
         component,
       );
@@ -569,20 +568,20 @@ describe('TrainerUnionsWords', () => {
 
       // Кликаем на правильное слово
       await clickWordAndCheckUncorrectBar(
-        `TrainerUnionsWords__${wordCurrentType}`,
+        `TrainerViewsWords__${wordCurrentType}`,
         false,
         component,
       );
 
       // Получаем противоположный тип текущего слова
-      const wordOppositeType: unionTypes =
+      const wordOppositeType =
         wordCurrentType === 'Подчинительный'
           ? 'Сочинительный'
           : 'Подчинительный';
 
       // Кликаем на неправильное слово
       await clickWordAndCheckUncorrectBar(
-        `TrainerUnionsWords__${wordOppositeType}`,
+        `TrainerViewsWords__${wordOppositeType}`,
         true,
         component,
       );
@@ -597,12 +596,12 @@ describe('TrainerUnionsWords', () => {
     const wordCurrentType = getTypeOfCurrentWord();
 
     // Получаем противоположный тип текущего слова
-    const wordOppositeType: unionTypes =
+    const wordOppositeType =
       wordCurrentType === 'Подчинительный' ? 'Сочинительный' : 'Подчинительный';
 
     // Кликаем на неправильное слово
     await clickWordAndCheckUncorrectBar(
-      `TrainerUnionsWords__${wordOppositeType}`,
+      `TrainerViewsWords__${wordOppositeType}`,
       true,
       component,
     );

@@ -13,14 +13,14 @@ import {
   WordsForTrainersItem,
   WordsForTrainersTypes,
 } from '../model/types/types';
-import { UnionsWordsInterface } from '../model/types/unions';
 import { WithMissedLettersWordsInterface } from '../model/types/withMissedLetters';
 import { TrainerChoiceWords } from '../ui/TrainerWords/TrainerChoiceWords/TrainerChoiceWords';
 import { TrainerPrimaryWords } from '../ui/TrainerWords/TrainerPrimaryWords/TrainerPrimaryWords';
-import { TrainerUnionsWords } from '../ui/TrainerWords/TrainerUnionsWords/TrainerUnionsWords';
 import { TrainerWithMissedLettersWords } from '../ui/TrainerWords/TrainerWithMissedLettersWords';
 import { TrainerAccentsWords } from '../ui/TrainerWords/TrainerAccentsWords/TrainerAccentsWords';
 import { AccentsWordsInterface } from '../model/types/accents';
+import { ViewsWordsInterface } from '../model/types/views';
+import { TrainerViewsWords } from '../ui/TrainerWords/TrainerViewsWords/TrainerViewsWords';
 
 type TrainerWords = {
   [key in TrainerWordsType]: React.ReactNode;
@@ -44,11 +44,16 @@ export const generateTrainerWords = (
       />
     ),
 
-    unions: (
-      <TrainerUnionsWords
-        randomWord={randomWord as UnionsWordsInterface}
+    views: (
+      <TrainerViewsWords
+        randomWord={randomWord as ViewsWordsInterface}
         wordOnSuccess={wordOnSuccess}
         wordOnFail={wordOnFail}
+        viewsTypes={Array.from(
+          new Set(
+            (words.items as ViewsWordsInterface[]).map((item) => item.viewType),
+          ),
+        )}
       />
     ),
 

@@ -1,4 +1,4 @@
-import { UnionsWordsInterface } from '../../../model/types/unions';
+import { ViewsWordsInterface } from '../../../model/types/views';
 import { PrimaryWordsInterface } from '../../../model/types/primary';
 import {
   TrainerWordsType,
@@ -28,9 +28,9 @@ export const generateBlockWithUncorrectWordArray = (
   },
 
   {
-    type: 'unions',
-    word: (word as UnionsWordsInterface).word,
-    validWord: (word as UnionsWordsInterface).unionType,
+    type: 'views',
+    word: (word as ViewsWordsInterface).word,
+    validWord: (word as ViewsWordsInterface).viewType,
   },
 
   {

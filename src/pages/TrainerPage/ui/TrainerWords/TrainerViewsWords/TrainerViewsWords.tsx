@@ -3,22 +3,28 @@ import { Flex } from '@/shared/lib/Stack';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
-import * as styles from './TrainerUnionsWords.module.scss';
+import * as styles from './TrainerViewsWords.module.scss';
 import { useTrainerWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   wordActionsFunctionType,
   wordActionsFunctionExtendType,
 } from '../../../lib/hooks/useWordActions';
-import { UnionsWordsInterface, unionTypes } from '../../../model/types/unions';
+import { ViewsWordsInterface } from '../../../model/types/views';
 
-interface TrainerUnionsWordsProps {
-  randomWord: UnionsWordsInterface;
+interface TrainerViewsWordsProps {
+  randomWord: ViewsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
   wordOnFail: wordActionsFunctionExtendType;
+  viewsTypes: string[];
 }
 
-export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
-  ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
+export const TrainerViewsWords: React.FC<TrainerViewsWordsProps> = memo(
+  ({
+    randomWord,
+    wordOnSuccess,
+    wordOnFail,
+    viewsTypes,
+  }): React.JSX.Element => {
     // Инициализация данных и контекста
     const storeWords = useTrainerWords();
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
@@ -26,8 +32,8 @@ export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
     return (
       <Flex width="100" direction="column" gap="10" justify="center">
         <span
-          className={styles.TrainerUnionsWords__word}
-          data-testid="TrainerUnionsWords__word"
+          className={styles.TrainerViewsWords__word}
+          data-testid="TrainerViewsWords__word"
         >
           {randomWord.word}
         </span>
@@ -37,26 +43,26 @@ export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
           direction={tabletMediaQueryWidth.matches ? 'column' : 'row'}
           width="100"
         >
-          {unionTypes.map((unionType, index) => (
+          {viewsTypes.map((viewsType, index) => (
             <TrainerWord
-              dataTestId={`TrainerUnionsWords__${unionType}`}
+              dataTestId={`TrainerViewsWords__${viewsType}`}
               onClick={
-                unionType === randomWord.unionType
+                viewsType === randomWord.viewType
                   ? () => wordOnSuccess(storeWords, isErrorWork, randomWord.id)
                   : () =>
                       wordOnFail(
                         storeWords,
                         isErrorWork,
                         randomWord.id,
-                        'unions',
+                        'views',
                       )
               }
               type={
-                isIncorrect && unionType !== randomWord.unionType
+                isIncorrect && viewsType !== randomWord.viewType
                   ? 'invalid'
                   : 'default'
               }
-              key={unionType}
+              key={viewsType}
               style={
                 index === 0
                   ? {
@@ -67,7 +73,7 @@ export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
                   : {}
               }
             >
-              {unionType}
+              {viewsType}
             </TrainerWord>
           ))}
         </Flex>
@@ -76,4 +82,4 @@ export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
   },
 );
 
-TrainerUnionsWords.displayName = 'TrainerUnionsWords';
+TrainerViewsWords.displayName = 'TrainerViewsWords';

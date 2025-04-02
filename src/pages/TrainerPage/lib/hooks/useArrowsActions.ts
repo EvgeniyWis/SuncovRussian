@@ -38,7 +38,7 @@ export const useArrowsActions = (
     const wordElements = document.querySelectorAll('[data-name="TrainerWord"]');
 
     const clickElements = (NotReverseIndex: number): void => {
-      if (words.type === 'unions') {
+      if (words.type === 'views') {
         (wordElements[NotReverseIndex] as HTMLElement).click();
         return;
       }

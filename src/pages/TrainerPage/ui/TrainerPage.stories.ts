@@ -27,7 +27,7 @@ export const TrainerAccentsWords: Story = {
   },
 };
 
-export const TrainerUnionsWords: Story = {
+export const TrainerViewsWords: Story = {
   args: {
     words: wordsForTrainers['Виды союзов'],
     theme: 'Виды союзов',
