@@ -2369,13 +2369,13 @@ export const wordsForTrainers: WordsForTrainers = {
       {
         valid: 'без прикрас',
         invalid: 'без прекрас',
-        differenceIndexes: [6],
+        differenceIndexes: [7],
         id: 0,
       },
       {
         valid: 'беспристрастный',
         invalid: 'беспрестрастный',
-        differenceIndexes: [5],
+        differenceIndexes: [6],
         id: 1,
       },
       {
