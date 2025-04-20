@@ -1,0 +1,182 @@
+# Project Instructions
+
+Use specification and guidelines as you build the app.
+
+Write the complete code for every step. Do not get lazy.
+
+Your goal is to completely finish whatever I ask for.
+
+You will see tags in the code. These are context tags that you should use to help you understand the codebase.
+
+## Overview
+
+This is a web app template.
+
+## Tech Stack
+
+- Frontend: React.js with Feature Sliced Design
+
+## Project Structure (FSD Structure)
+
+The project follows Feature Sliced Design methodology with the following structure:
+
+### Layers (from bottom to top)
+
+1. **shared** - Reusable infrastructure code
+
+   - `api` - API clients, base requests
+   - `assets` - Static assets (fonts, icons)
+   - `const` - constants
+   - `lib` - Utility functions
+   - `services` - global async thunks for RTK Query
+   - `store` - redux js toolkit configuration
+   - `tests` - global helpers for jest and rtl
+   - `types` - TypeScript types and interfaces
+   - `ui` - UI components (buttons, inputs, etc.)
+   - `utils` - global utils and helpers
+
+2. **entities** - Business entities
+
+   - "name of component":
+     - `api` - api endpoints
+     - `ui` - ui of component
+
+3. **features** - User interactions and business logic
+
+   - "name of feature":
+     - `lib` - utils and helpers for this feature
+       - `helpers` - helper functions
+       - `hooks` - custom hooks
+   - `model` - types, static
+   - `ui` - ui for this feature
+
+4. **widgets** - Composite components
+
+   - `Page` - global page layout
+
+5. **pages** - Application pages
+
+   - "name of page":
+     - `api` - api endpoints
+     - `ui` - ui of component
+     - `model` - types, static
+
+6. **app** - Application-wide setup
+   - `providers` - Global providers (router, auth, etc.)
+   - `styles` - Global styles
+   - `types` - Root types
+
+### Rules
+
+- Each layer can only import from layers below it
+- Shared code goes in the `shared` layer
+- Business logic goes in `entities` and `features`
+- UI components go in `widgets` and `pages`
+- Each slice should be self-contained with its own components, types, and utils
+- Use index files to export public API of each slice
+- Keep slices focused and single-responsibility
+- Follow the naming convention: `{layer}/{slice}/{component}`
+
+Example structure:
+
+```
+src/
+├── shared/
+│   ├── api/
+│   ├── config/
+│   ├── lib/
+│   ├── types/
+│   └── ui/
+├── entities/
+│   ├── user/
+│   ├── todo/
+│   └── chat/
+├── features/
+│   ├── auth/
+│   ├── todo-management/
+│   └── chat-management/
+├── widgets/
+│   ├── header/
+│   ├── sidebar/
+│   └── todo-list/
+├── pages/
+│   ├── home/
+│   ├── todos/
+│   └── chat/
+└── app/
+    ├── providers/
+    ├── styles/
+    └── layout/
+```
+
+## Rules
+
+Follow these rules when building the app.
+
+### General Rules
+
+- Use `@` to import anything from the app unless otherwise specified
+- Use kebab case for all files and folders unless otherwise specified
+- Don't update shadcn components unless otherwise specified
+
+#### Type Rules
+
+Follow these rules when working with types.
+
+- Name files like `example-types.ts`
+- All types should go in `types`
+- Make sure to export the types in `types/index.ts`
+- Prefer interfaces over type aliases
+- If referring to db types, use `@/db/schema` such as `SelectTodo` from `todos-schema.ts`
+
+An example of a type:
+
+`types/actions-types.ts`
+
+```ts
+export type ActionState<T> =
+  | { isSuccess: true; message: string; data: T }
+  | { isSuccess: false; message: string; data?: never };
+```
+
+And exporting it:
+
+`types/index.ts`
+
+```ts
+export * from './actions-types';
+```
+
+### Frontend Rules
+
+Follow these rules when working on the frontend.
+
+It uses React.js, Redux Toolkit and RTK Query.
+
+##### Client Components
+
+- Client components can safely rely on props passed down from server components, or handle UI interactions without needing <Suspense> if there’s no async logic.
+- Never use server actions in client components. If you need to create a new server action, create it in `/actions`
+
+Example of a client page:
+
+```tsx
+export default function ExampleClientPage() {
+  // Your code here
+}
+```
+
+Example of a client component:
+
+```tsx
+interface ExampleClientComponentProps {
+  initialData: any[];
+}
+
+export default function ExampleClientComponent({
+  initialData,
+}: ExampleClientComponentProps) {
+  // Client-side logic here
+  return <div>{initialData.length} items</div>;
+}
+```

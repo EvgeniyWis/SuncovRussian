@@ -1,0 +1,41 @@
+---
+description: Follow these rules for all requests.
+globs: 
+---
+# Project Instructions
+
+Use specification and guidelines as you build the app.
+
+Write the complete code for every step. Do not get lazy.
+
+Your goal is to completely finish whatever I ask for.
+
+You will see tags in the code. These are context tags that you should use to help you understand the codebase.
+
+## Overview
+
+This is a web app template.
+
+## Tech Stack
+
+- Frontend: React.js with Feature Sliced Design
+
+## Project Structure
+
+- `src` - whole frontend code
+- `lib` - Library code
+  - `hooks` - Custom hooks
+- `public` - Static assets
+- `types` - Type definitions
+- `index.ts` - Entry point
+- `config` - configuration files with data
+
+## Rules
+
+Follow these rules when building the app.
+
+### General Rules
+
+- All files should have a comment at the very top of the file that consisely explain what it does
+- Use kebab case for all files and folders unless otherwise specified
+- Don't update shadcn components unless otherwise specified
