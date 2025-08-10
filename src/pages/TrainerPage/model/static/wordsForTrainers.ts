@@ -5997,7 +5997,7 @@ export const wordsForTrainers: WordsForTrainers = {
   },
 };
 
-// Добавляем агрегированный раздел "Словарные части" из трех частей задания 9
+// Добавляем агрегированный раздел "задание 9" из трех частей задания 9
 (() => {
   const parts = [
     'задание 9 — часть 1',
@@ -6013,7 +6013,7 @@ export const wordsForTrainers: WordsForTrainers = {
     .flatMap((section) => (section.items as MissedItem[]))
     .map((item, index) => ({ ...item, id: index }));
 
-  wordsForTrainers['Словарные части'] = {
+  wordsForTrainers['задание 9'] = {
     type: 'withMissedLetters',
     inHeader: true,
     items: combined,

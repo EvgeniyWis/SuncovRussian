@@ -9,10 +9,10 @@ export const headerCategories: HeaderMenu = {
   Теория: [],
   Тренажеры: [
     ...Object.keys(wordsForTrainers).filter(
-      (key) => wordsForTrainers[key].inHeader && key !== 'Словарные части',
+      (key) => wordsForTrainers[key].inHeader && key !== 'задание 9',
     ),
     {
-      theme: 'Словарные части',
+      theme: 'задание 9',
       items: [
         { subtheme: 'часть 1' },
         { subtheme: 'часть 2' },
