@@ -12,7 +12,7 @@ export type HeaderMenu = {
   Тесты: string[];
   Диктанты: HeaderSubMenu[];
   Теория: string[];
-  Тренажеры: string[];
+  Тренажеры: Array<string | HeaderSubMenu>;
 };
 
 export type HeaderCategoryType = keyof HeaderMenu;

@@ -102,20 +102,24 @@ export const Header: React.FC<HeaderProps> = memo(
                                         window.location.pathname,
                                       ) && styles.Header__submenu__item__active
                                     }`}
-                                      onClick={() =>
-                                        setHoveredHeaderCategory(null)
-                                      }
+                                      onClick={() => setHoveredHeaderCategory(null)}
                                     >
                                       {menuItem}
                                     </Link>
                                   );
                                 })()
                               : (() => {
-                                  // Ссылка на подменю
+                                  // Ссылки на подменю
                                   const submenuItemLink = (
                                     subTheme: string,
-                                  ): string =>
-                                    `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+                                  ): string => {
+                                    if (category === 'Тренажеры') {
+                                      const trainerSubTheme = `задание 9 — ${subTheme}`;
+                                      return `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(trainerSubTheme)}`;
+                                    }
+
+                                    return `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+                                  };
 
                                   // Разбитие подменю на слайсы по 10 штук
                                   const submenuItems = menuItem.items.reduce<
@@ -131,26 +135,42 @@ export const Header: React.FC<HeaderProps> = memo(
                                     return acc;
                                   }, []);
 
+                                  const isTrainerCategory = category === 'Тренажеры';
+                                  const parentLink = isTrainerCategory
+                                    ? `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}`
+                                    : undefined;
+
                                   return (
                                     <Flex
-                                      onMouseLeave={() =>
-                                        setVisibleSubmenu(null)
-                                      }
+                                      onMouseLeave={() => setVisibleSubmenu(null)}
                                       align="start"
                                     >
-                                      <span
-                                        className={`${styles.Header__submenu__item} 
+                                      {isTrainerCategory ? (
+                                        <Link
+                                          to={parentLink!}
+                                          className={`${styles.Header__submenu__item} 
+                                    ${
+                                      window.location.pathname.startsWith(
+                                        `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}`,
+                                      ) && styles.Header__submenu__item__active
+                                    }`}
+                                          onMouseEnter={() => setVisibleSubmenu(menuItem.theme)}
+                                        >
+                                          {menuItem.theme}
+                                        </Link>
+                                      ) : (
+                                        <span
+                                          className={`${styles.Header__submenu__item} 
                                     ${
                                       window.location.pathname.startsWith(
                                         `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/`,
                                       ) && styles.Header__submenu__item__active
                                     }`}
-                                        onMouseEnter={() =>
-                                          setVisibleSubmenu(menuItem.theme)
-                                        }
-                                      >
-                                        {menuItem.theme}
-                                      </span>
+                                          onMouseEnter={() => setVisibleSubmenu(menuItem.theme)}
+                                        >
+                                          {menuItem.theme}
+                                        </span>
+                                      )}
 
                                       <Flex
                                         align="start"
@@ -179,9 +199,7 @@ export const Header: React.FC<HeaderProps> = memo(
                                                 ) &&
                                                 styles.Header__submenu__item__active
                                               }`}
-                                                to={submenuItemLink(
-                                                  item.subtheme,
-                                                )}
+                                                to={submenuItemLink(item.subtheme)}
                                                 key={item.subtheme}
                                               >
                                                 {item.subtheme}

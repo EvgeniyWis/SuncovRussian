@@ -5596,4 +5596,426 @@ export const wordsForTrainers: WordsForTrainers = {
       },
     ],
   },
+
+  'задание 9 — часть 1': {
+    type: 'withMissedLetters',
+    inHeader: false,
+
+    items: [
+      {
+        word: 'тишина',
+        missedLettersIndexes: [4],
+        id: 0,
+      },
+      {
+        word: 'белизна',
+        missedLettersIndexes: [4],
+        id: 1,
+      },
+      {
+        word: 'маета',
+        missedLettersIndexes: [3],
+        id: 2,
+      },
+      {
+        word: 'котловина',
+        missedLettersIndexes: [5],
+        id: 3,
+      },
+      {
+        word: 'сердцевина',
+        missedLettersIndexes: [6],
+        id: 4,
+      },
+      {
+        word: 'пригарь',
+        missedLettersIndexes: [5],
+        id: 5,
+      },
+      {
+        word: 'выгарки',
+        missedLettersIndexes: [4],
+        id: 6,
+      },
+      {
+        word: 'зоревать',
+        missedLettersIndexes: [2],
+        id: 7,
+      },
+      {
+        word: 'пловец',
+        missedLettersIndexes: [3],
+        id: 8,
+      },
+      {
+        word: 'росток',
+        missedLettersIndexes: [2],
+        id: 9,
+      },
+      {
+        word: 'вырост',
+        missedLettersIndexes: [4],
+        id: 10,
+      },
+      {
+        word: 'ростовщик',
+        missedLettersIndexes: [2],
+        id: 11,
+      },
+      {
+        word: 'равнина',
+        missedLettersIndexes: [2],
+        id: 12,
+      },
+      {
+        word: 'сочетать',
+        missedLettersIndexes: [4],
+        id: 13,
+      },
+      {
+        word: 'аккомпанемент',
+        missedLettersIndexes: [7],
+        id: 14,
+      },
+      {
+        word: 'бюллетень',
+        missedLettersIndexes: [2, 5],
+        id: 15,
+      },
+      {
+        word: 'брошюра',
+        missedLettersIndexes: [5],
+        id: 16,
+      },
+      {
+        word: 'вестибюль',
+        missedLettersIndexes: [5],
+        id: 17,
+      },
+      {
+        word: 'винегрет',
+        missedLettersIndexes: [2, 4],
+        id: 18,
+      },
+      {
+        word: 'экстремальный',
+        missedLettersIndexes: [6],
+        id: 19,
+      },
+      {
+        word: 'укротить',
+        missedLettersIndexes: [4],
+        id: 20,
+      },
+      {
+        word: 'дирижёр',
+        missedLettersIndexes: [2, 4],
+        id: 21,
+      },
+      {
+        word: 'иждивенец',
+        missedLettersIndexes: [4],
+        id: 22,
+      },
+      {
+        word: 'катастрофа',
+        missedLettersIndexes: [2, 4],
+        id: 23,
+      },
+      {
+        word: 'палисадник',
+        missedLettersIndexes: [2, 4],
+        id: 24,
+      },
+    ],
+  },
+
+  'задание 9 — часть 2': {
+    type: 'withMissedLetters',
+    inHeader: false,
+
+    items: [
+      {
+        word: 'резидент',
+        missedLettersIndexes: [2],
+        id: 0,
+      },
+      {
+        word: 'спартакиада',
+        missedLettersIndexes: [3, 9],
+        id: 1,
+      },
+      {
+        word: 'стипендия',
+        missedLettersIndexes: [3],
+        id: 2,
+      },
+      {
+        word: 'трясина',
+        missedLettersIndexes: [3],
+        id: 3,
+      },
+      {
+        word: 'университет',
+        missedLettersIndexes: [3, 8],
+        id: 4,
+      },
+      {
+        word: 'директор',
+        missedLettersIndexes: [2],
+        id: 5,
+      },
+      {
+        word: 'стратегия',
+        missedLettersIndexes: [4],
+        id: 6,
+      },
+      {
+        word: 'велосипед',
+        missedLettersIndexes: [6],
+        id: 7,
+      },
+      {
+        word: 'менталитет',
+        missedLettersIndexes: [2, 7],
+        id: 8,
+      },
+      {
+        word: 'президент',
+        missedLettersIndexes: [3, 5],
+        id: 9,
+      },
+      {
+        word: 'абитуриент',
+        missedLettersIndexes: [3, 7],
+        id: 10,
+      },
+      {
+        word: 'циклон',
+        missedLettersIndexes: [2],
+        id: 11,
+      },
+      {
+        word: 'акварель',
+        missedLettersIndexes: [4],
+        id: 12,
+      },
+      {
+        word: 'карикатура',
+        missedLettersIndexes: [2],
+        id: 13,
+      },
+      {
+        word: 'комфорт',
+        missedLettersIndexes: [2],
+        id: 14,
+      },
+      {
+        word: 'цикорий',
+        missedLettersIndexes: [2],
+        id: 15,
+      },
+      {
+        word: 'инициалы',
+        missedLettersIndexes: [3],
+        id: 16,
+      },
+      {
+        word: 'габариты',
+        missedLettersIndexes: [4],
+        id: 17,
+      },
+      {
+        word: 'эксперимент',
+        missedLettersIndexes: [5, 7],
+        id: 18,
+      },
+      {
+        word: 'кастрюля',
+        missedLettersIndexes: [2],
+        id: 19,
+      },
+      {
+        word: 'фонтан',
+        missedLettersIndexes: [2],
+        id: 20,
+      },
+      {
+        word: 'балкон',
+        missedLettersIndexes: [2],
+        id: 21,
+      },
+      {
+        word: 'каблук',
+        missedLettersIndexes: [2],
+        id: 22,
+      },
+      {
+        word: 'кондуктор',
+        missedLettersIndexes: [2],
+        id: 23,
+      },
+      {
+        word: 'карниз',
+        missedLettersIndexes: [2],
+        id: 24,
+      },
+    ],
+  },
+
+  'задание 9 — часть 3': {
+    type: 'withMissedLetters',
+    inHeader: false,
+
+    items: [
+      {
+        word: 'виртуоз',
+        missedLettersIndexes: [2],
+        id: 0,
+      },
+      {
+        word: 'витраж',
+        missedLettersIndexes: [2],
+        id: 1,
+      },
+      {
+        word: 'бадминтон',
+        missedLettersIndexes: [2],
+        id: 2,
+      },
+      {
+        word: 'калач',
+        missedLettersIndexes: [2],
+        id: 3,
+      },
+      {
+        word: 'оригинальный',
+        missedLettersIndexes: [3, 5],
+        id: 4,
+      },
+      {
+        word: 'гигиена',
+        missedLettersIndexes: [2, 4],
+        id: 5,
+      },
+      {
+        word: 'кавычки',
+        missedLettersIndexes: [2],
+        id: 6,
+      },
+      {
+        word: 'портрет',
+        missedLettersIndexes: [2],
+        id: 7,
+      },
+      {
+        word: 'бечёвка',
+        missedLettersIndexes: [2],
+        id: 8,
+      },
+      {
+        word: 'честолюбивый',
+        missedLettersIndexes: [2],
+        id: 9,
+      },
+      {
+        word: 'тиснёная обложка',
+        missedLettersIndexes: [2],
+        id: 10,
+      },
+      {
+        word: 'вытесненный из вагона',
+        missedLettersIndexes: [4],
+        id: 11,
+      },
+      {
+        word: 'бидон',
+        missedLettersIndexes: [2],
+        id: 12,
+      },
+      {
+        word: 'долина',
+        missedLettersIndexes: [2],
+        id: 13,
+      },
+      {
+        word: 'каморка',
+        missedLettersIndexes: [2],
+        id: 14,
+      },
+      {
+        word: 'напрямик',
+        missedLettersIndexes: [5],
+        id: 15,
+      },
+      {
+        word: 'поглощать',
+        missedLettersIndexes: [5],
+        id: 16,
+      },
+      {
+        word: 'корифей',
+        missedLettersIndexes: [2],
+        id: 17,
+      },
+      {
+        word: 'мораторий',
+        missedLettersIndexes: [2, 4],
+        id: 18,
+      },
+      {
+        word: 'потрясающий',
+        missedLettersIndexes: [5],
+        id: 19,
+      },
+      {
+        word: 'фонтан',
+        missedLettersIndexes: [2],
+        id: 20,
+      },
+      {
+        word: 'утрамбовать',
+        missedLettersIndexes: [4],
+        id: 21,
+      },
+      {
+        word: 'багровый',
+        missedLettersIndexes: [2],
+        id: 22,
+      },
+      {
+        word: 'пристежной (ворот)',
+        missedLettersIndexes: [6],
+        id: 23,
+      },
+      {
+        word: 'наваждение',
+        missedLettersIndexes: [4],
+        id: 24,
+      },
+    ],
+  },
 };
+
+// Добавляем агрегированный раздел "Словарные части" из трех частей задания 9
+(() => {
+  const parts = [
+    'задание 9 — часть 1',
+    'задание 9 — часть 2',
+    'задание 9 — часть 3',
+  ] as const;
+
+  type MissedItem = import('../types/withMissedLetters').WithMissedLettersWordsInterface;
+
+  const combined: MissedItem[] = parts
+    .map((name) => wordsForTrainers[name])
+    .filter((section) => section.type === 'withMissedLetters')
+    .flatMap((section) => (section.items as MissedItem[]))
+    .map((item, index) => ({ ...item, id: index }));
+
+  wordsForTrainers['Словарные части'] = {
+    type: 'withMissedLetters',
+    inHeader: true,
+    items: combined,
+  };
+})();
