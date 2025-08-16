@@ -1,107 +1,109 @@
-/* eslint-disable ulbi-tv-plugin/layer-imports */
-import { useAppDispatch } from '@/shared/store';
-import { getAllTests } from '@/pages/TestsPage';
-import { useEffect } from 'react';
-import { HeaderMenu } from '../../model/types';
-import { DictantType, getAllDictants } from '@/pages/DictantsPage';
-import { getDataForCategory } from './lib/getDataForCategory';
-import {
-  getAllPartsOfSpeach,
-  PartsOfSpeachType,
-} from '@/pages/PartsOfSpeachPage';
-import { headerCategories } from '../../model/data';
-import { TestInterface } from '@/features/Test';
+// TODO: Вернуть загрузку данных с бекенда
 
-interface FetchProviderProps {
-  children: React.ReactNode;
-  setCategories: React.Dispatch<React.SetStateAction<HeaderMenu>>;
-  setCategoriesLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// /* eslint-disable ulbi-tv-plugin/layer-imports */
+// import { useAppDispatch } from '@/shared/store';
+// import { getAllTests } from '@/pages/TestsPage';
+// import { useEffect } from 'react';
+// import { HeaderMenu } from '../../model/types';
+// import { DictantType, getAllDictants } from '@/pages/DictantsPage';
+// import { getDataForCategory } from './lib/getDataForCategory';
+// import {
+//   getAllPartsOfSpeach,
+//   PartsOfSpeachType,
+// } from '@/pages/PartsOfSpeachPage';
+// import { headerCategories } from '../../model/data';
+// import { TestInterface } from '@/features/Test';
 
-export const FetchProvider: React.FC<FetchProviderProps> = ({
-  children,
-  setCategories,
-  setCategoriesLoading,
-}): React.JSX.Element => {
-  // Получаем тесты с бекенда
-  const dispatch = useAppDispatch();
+// interface FetchProviderProps {
+//   children: React.ReactNode;
+//   setCategories: React.Dispatch<React.SetStateAction<HeaderMenu>>;
+//   setCategoriesLoading: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setCategoriesLoading(true);
+// export const FetchProvider: React.FC<FetchProviderProps> = ({
+//   children,
+//   setCategories,
+//   setCategoriesLoading,
+// }): React.JSX.Element => {
+//   // Получаем тесты с бекенда
+//   const dispatch = useAppDispatch();
 
-      try {
-        // Получаем тесты с бекенда
-        const testsData = await getDataForCategory<TestInterface[]>(
-          {
-            requestID: 'tests/getAllTests',
-            getRequest: getAllTests,
-          },
-          dispatch,
-        );
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       setCategoriesLoading(true);
 
-        // Получаем диктанты с бекенда
-        const dictantsData = await getDataForCategory<DictantType[]>(
-          {
-            requestID: 'dictants/getAllDictants',
-            getRequest: getAllDictants,
-          },
-          dispatch,
-        );
+//       try {
+//         // Получаем тесты с бекенда
+//         const testsData = await getDataForCategory<TestInterface[]>(
+//           {
+//             requestID: 'tests/getAllTests',
+//             getRequest: getAllTests,
+//           },
+//           dispatch,
+//         );
 
-        // Получаем части речи с бекенда
-        const partsOfSpeachData = await getDataForCategory<PartsOfSpeachType[]>(
-          {
-            requestID: 'partsOfSpeach/getAllPartsOfSpeach',
-            getRequest: getAllPartsOfSpeach,
-          },
-          dispatch,
-        );
+//         // Получаем диктанты с бекенда
+//         const dictantsData = await getDataForCategory<DictantType[]>(
+//           {
+//             requestID: 'dictants/getAllDictants',
+//             getRequest: getAllDictants,
+//           },
+//           dispatch,
+//         );
 
-        // Функция для получения объекта с диктантами
-        const getDictantsItems = (dictant: DictantType) => [
-          ...dictant.items.map((item) => ({
-            subtheme: item.subtheme,
-          })),
-        ];
+//         // Получаем части речи с бекенда
+//         const partsOfSpeachData = await getDataForCategory<PartsOfSpeachType[]>(
+//           {
+//             requestID: 'partsOfSpeach/getAllPartsOfSpeach',
+//             getRequest: getAllPartsOfSpeach,
+//           },
+//           dispatch,
+//         );
 
-        // Обновляем стейт с категориями
-        setCategories((prevCategories) => ({
-          ...prevCategories,
-          ...headerCategories,
-          Тесты: [...testsData.map((test) => test.title)],
+//         // Функция для получения объекта с диктантами
+//         const getDictantsItems = (dictant: DictantType) => [
+//           ...dictant.items.map((item) => ({
+//             subtheme: item.subtheme,
+//           })),
+//         ];
 
-          Диктанты: [
-            ...dictantsData.map((dictant) => ({
-              theme: dictant.theme,
-              items:
-                dictant.items.length > 1
-                  ? [
-                      ...getDictantsItems(dictant),
+//         // Обновляем стейт с категориями
+//         setCategories((prevCategories) => ({
+//           ...prevCategories,
+//           ...headerCategories,
+//           Тесты: [...testsData.map((test) => test.title)],
 
-                      {
-                        subtheme: `Все ${dictant.theme}`,
-                      },
-                    ]
-                  : [...getDictantsItems(dictant)],
-            })),
-          ],
+//           Диктанты: [
+//             ...dictantsData.map((dictant) => ({
+//               theme: dictant.theme,
+//               items:
+//                 dictant.items.length > 1
+//                   ? [
+//                       ...getDictantsItems(dictant),
 
-          'Части речи': [
-            ...partsOfSpeachData.map((partOfSpeach) => partOfSpeach.theme),
-          ],
-        }));
-      } catch (error) {
-        console.error('Ошибка при загрузке категорий:', error);
-      } finally {
-        setCategoriesLoading(false);
-      }
-    };
+//                       {
+//                         subtheme: `Все ${dictant.theme}`,
+//                       },
+//                     ]
+//                   : [...getDictantsItems(dictant)],
+//             })),
+//           ],
 
-    fetchData();
-  }, [dispatch, setCategories, setCategoriesLoading]);
+//           'Части речи': [
+//             ...partsOfSpeachData.map((partOfSpeach) => partOfSpeach.theme),
+//           ],
+//         }));
+//       } catch (error) {
+//         console.error('Ошибка при загрузке категорий:', error);
+//       } finally {
+//         setCategoriesLoading(false);
+//       }
+//     };
 
-  return <>{children}</>;
-};
+//     fetchData();
+//   }, [dispatch, setCategories, setCategoriesLoading]);
 
-FetchProvider.displayName = 'FetchProvider';
+//   return <>{children}</>;
+// };
+
+// FetchProvider.displayName = 'FetchProvider';

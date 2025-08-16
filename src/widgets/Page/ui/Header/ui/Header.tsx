@@ -7,8 +7,6 @@ import { Link, matchPath } from 'react-router-dom';
 import { transliterate } from '@/shared/utils/transliterate';
 import { isInJest } from '@/shared/tests/isInJest';
 
-import { FetchProvider } from '../lib/FetchProvider/FetchProvider';
-
 interface HeaderProps {
   withHomeButton?: boolean;
 }
@@ -32,17 +30,10 @@ export const Header: React.FC<HeaderProps> = memo(
     const startPath = isDev ? '' : `/${publicUrl}`;
 
     // Делаем категории хедера стейтом
-    const [categories, setCategories] = useState<HeaderMenu>(headerCategories);
-
-    // Отображение загрузки, если категории не загружены
-    const [categoriesLoading, setCategoriesLoading] = useState<boolean>(true);
+    const categories = useState<HeaderMenu>(headerCategories)[0];
 
     return (
       <header className={styles.Header}>
-        <FetchProvider
-          setCategories={setCategories}
-          setCategoriesLoading={setCategoriesLoading}
-        >
           <Flex maxHeight>
             {Object.entries(categories).map(([category, submenu]) => {
               // Инициализация ссылки предмета навигации
@@ -220,19 +211,19 @@ export const Header: React.FC<HeaderProps> = memo(
               );
             })}
           </Flex>
-
+{/* 
           {categoriesLoading && (
             <Flex maxHeight justify="center">
               <span className={styles.Header__item}>Идёт загрузка...</span>
             </Flex>
-          )}
+          )} */}
 
           {withHomeButton && (
             <Flex maxHeight justify="center" className={styles.Header__item}>
               <Link to="/">Домой</Link>
             </Flex>
           )}
-        </FetchProvider>
+
       </header>
     );
   },
